@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EAD_Project-FrontEnd</string>
+    <string name="page_title">%s page is selected</string>
 </resources>

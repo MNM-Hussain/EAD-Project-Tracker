@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="textcolor">#FF000000</color>
+    <color name="navigation_background_color">#750000</color>
+    <color name="navigation_selectedIcon_color">#040000</color>
+    <color name="navigation_circleColor">#FFFFFF</color>
 </resources>
