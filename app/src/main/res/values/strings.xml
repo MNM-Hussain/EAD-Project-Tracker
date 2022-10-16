@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">EAD_Project-FrontEnd</string>
     <string name="page_title">%s page is selected</string>
+    <string name="upper_logo">TOP ICON</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="forgotPassword">FORGOT PASSWORD?</string>
+    <string name="orSeparate">OR</string>
+    <string name="googleIcon">google icon</string>
+    <string name="fbIcon">facebook icon</string>
+    <string name="noAccount">New User? Create an Account</string>
 </resources>
