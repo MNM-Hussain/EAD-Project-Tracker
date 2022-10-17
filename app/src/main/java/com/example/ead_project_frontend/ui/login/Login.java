@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.ui.navigation.NavigationBar;
+import com.example.ead_project_frontend.ui.registration.Registration;
 
 public class Login extends AppCompatActivity {
     private Button button;
@@ -29,6 +30,11 @@ public class Login extends AppCompatActivity {
 
     public void openHomePage(){
         Intent intent = new Intent(this, NavigationBar.class);
+        startActivity(intent);
+    }
+
+    public void MoveToRegistrationActivity(View view) {
+        Intent intent = new Intent(this, Registration.class);
         startActivity(intent);
     }
 }
