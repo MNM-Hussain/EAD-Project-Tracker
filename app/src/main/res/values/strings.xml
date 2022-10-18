@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EAD_Project-FrontEnd</string>
     <string name="page_title">%s page is selected</string>
-<!--    Login Strings-->
+    <!--    Login Strings-->
     <string name="upper_logo">TOP ICON</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -11,7 +11,7 @@
     <string name="googleIcon">google icon</string>
     <string name="fbIcon">facebook icon</string>
     <string name="noAccount">New User? Create an Account</string>
-<!--    Registration Strings-->
+    <!--    Registration Strings-->
     <string name="userName">Full Name</string>
     <string name="userNIC">NIC</string>
     <string name="userEmail">Email</string>
