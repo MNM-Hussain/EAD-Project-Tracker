@@ -17,5 +17,10 @@
     <string name="userEmail">Email</string>
     <string name="userVehicleType">Vehicle Type</string>
     <string name="userFuelType">Fuel Type</string>
+    <!--    Fuel station  card Strings-->
+    <string name="fuelStopName">Fuel stop Name</string>
+    <string name="location">location</string>
+    <string name="numberOfPerson">number</string>
+
 
 </resources>
