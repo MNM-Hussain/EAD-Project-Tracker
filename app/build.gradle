@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.example.ead_project_frontend"
@@ -32,5 +31,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
     implementation 'com.airbnb.android:lottie:3.4.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }
