@@ -132,9 +132,9 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
     }
 
-    public Boolean checkUserCredentials (String userName, String password) {
+    public Boolean checkUserCredentials (String email, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Registration where userName = ? and password = ?", new String[] { userName, password });
+        Cursor cursor = DB.rawQuery("Select * from Registration where email = ? and password = ?", new String[] { email, password });
         if (cursor.getCount() > 0)
             return true;
         else
