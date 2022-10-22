@@ -3,6 +3,7 @@ package com.example.ead_project_frontend.ui.navigation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.ui.fragment.FragmentHome;
 import com.example.ead_project_frontend.ui.fragment.FragmentProfile;
+import com.example.ead_project_frontend.ui.login.Login;
 
 public class NavigationBar extends AppCompatActivity {
 
@@ -62,6 +64,11 @@ public class NavigationBar extends AppCompatActivity {
                      case ID_PROFILE:
                          name ="this profile page where user item are here";
                          select_fragment = new FragmentProfile();
+                         break;
+
+                     case ID_LOGOUT:
+                         Intent intent = new Intent(NavigationBar.this, Login.class);
+                         startActivity(intent);
                          break;
                      default:
                          name ="";
