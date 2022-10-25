@@ -10,7 +10,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#750000"
+        android:background="#ffffff"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Welcome To Fuel Tracker"
-                android:textColor="#000"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="25dp"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Explore Stations"
-            android:textColor="#000"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -50,8 +50,8 @@
                 android:id="@+id/search_bar"
                 android:layout_width="340dp"
                 android:layout_height="55dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/search_bg"
                 android:paddingLeft="30dp"
                 android:text="Search Stations"
@@ -67,41 +67,41 @@
                 android:background="@drawable/ellpise" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal">-->
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="88dp"
-                android:layout_gravity="center"
-                android:background="@drawable/petrol" />
+<!--            <ImageView-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="88dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:background="@drawable/petrol" />-->
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="88dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="12dp"
-                android:background="@drawable/petrol2" />
+<!--            <ImageView-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="88dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="12dp"-->
+<!--                android:background="@drawable/petrol2" />-->
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="88dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="12dp"
-                android:background="@drawable/queue" />
+<!--            <ImageView-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="88dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="12dp"-->
+<!--                android:background="@drawable/queue" />-->
 
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="88dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="12dp"
-                android:background="@drawable/station" />
+<!--            <ImageView-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="88dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="12dp"-->
+<!--                android:background="@drawable/station" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
 
 
