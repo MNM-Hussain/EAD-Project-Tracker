@@ -6,9 +6,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ead_project_frontend.R;
@@ -18,6 +21,11 @@ import com.example.ead_project_frontend.ui.updateArrivalStation.UpdateArrivalSta
 public class UpdatePumpedFuelStatus extends AppCompatActivity {
     private Button btn_Exit_Pumped, btn_Pumped;
     private Dialog dialog;
+    private TextView back_arrow;
+
+    private Chronometer chronometer;
+    private long pauseOffset;
+    private boolean running;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +33,56 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
         setContentView(R.layout.activity_update_pumped_fuel_status);
 
         // Initializing with Id
+        back_arrow = findViewById(R.id.back_arrow);
         btn_Exit_Pumped = findViewById(R.id.btn_Exit_Pumped);
         btn_Pumped = findViewById(R.id.btn_Pumped);
+
+        //
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UpdatePumpedFuelStatus.this,UpdateArrivalStation.class);
+                startActivity(intent);
+            }
+        });
+
+        //Initializing timer
+        chronometer = findViewById(R.id.chronometer);
+        chronometer.setFormat("Wait-Time: %s");
+        chronometer.setBase(SystemClock.elapsedRealtime());
+
+        //setting a listener
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                if ((SystemClock.elapsedRealtime() - chronometer.getBase()) >= 1000000) {
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    Toast.makeText(UpdatePumpedFuelStatus.this, "Timeout!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //Starting the timer when user arrived to station
+        if (!running) {
+            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            chronometer.start();
+            running = true;
+        }
 
         //send to home if exit
         btn_Exit_Pumped.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UpdatePumpedFuelStatus.this, Login.class);
-                startActivity(intent);
+//                Intent intent = new Intent(UpdatePumpedFuelStatus.this, Login.class);
+//                startActivity(intent);
+
+                //stop the timer
+                if (running) {
+                    chronometer.stop();
+                    pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    System.out.println(pauseOffset + "difference time");
+                    running = false;
+                }
             }
         });
 
@@ -57,7 +106,7 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogPop_Animation; //Setting the animations to dialog
 
         //Initializing popup buttons
-        Button btn_ConfirmInsertPump= dialog.findViewById(R.id.btn_ConfirmInsertPump);
+        Button btn_ConfirmInsertPump = dialog.findViewById(R.id.btn_ConfirmInsertPump);
         Button btn_CancelInsertPump = dialog.findViewById(R.id.btn_CancelInsertPump);
 
         btn_ConfirmInsertPump.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +117,14 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
                 //send to pumped status page from popup
                 Intent intent = new Intent(UpdatePumpedFuelStatus.this, Login.class);
                 startActivity(intent);
+
+                //Stop the timer
+                if (running) {
+                    chronometer.stop();
+                    pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    System.out.println(pauseOffset + "difference time");
+                    running = false;
+                }
             }
         });
 
