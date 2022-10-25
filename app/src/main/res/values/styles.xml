@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/DialogPop_Animation</item> <!--custom animation style-->
     </style>
 
     <style name="StyleRadioButton" parent="Theme.AppCompat.Light">
@@ -12,6 +13,11 @@
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <!-- default color of the radio button -->
         <item name="android:textColorPrimary">@android:color/darker_gray</item>
+    </style>
+
+    <style name="DialogPop_Animation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
 </resources>

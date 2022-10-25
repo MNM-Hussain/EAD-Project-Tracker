@@ -8,11 +8,32 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/actions"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/actions">
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".ui.updatePumpedFuelStatus.UpdatePumpedFuelStatus"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".ui.updateArrivalStation.UpdateArrivalStation"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />
@@ -20,16 +41,16 @@
         <activity
             android:name=".ui.splash_screen.SplashScreen"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".ui.registration.Registration" />
         <activity
             android:name=".ui.login.Login"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.navigation.NavigationBar"
             android:exported="true">
@@ -40,8 +61,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.updateProfile.UpdateProfile"
+            android:exported="true">
+<!--             <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+        </activity>
     </application>
-
-
 
 </manifest>

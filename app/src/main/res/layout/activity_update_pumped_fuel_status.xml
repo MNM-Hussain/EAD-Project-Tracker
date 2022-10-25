@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.updatePumpedFuelStatus.UpdatePumpedFuelStatus">
+
+    <View
+        android:id="@+id/topView_pumpedStatus"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/profile_top_upperview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@drawable/ic_back_arrow"
+        android:ems="10"
+        android:padding="10dp"
+        android:text="  Previous"
+        android:textColor="#ffffff"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="@+id/topView_pumpedStatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/StationImage_pumped"
+        android:layout_width="145dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/profile_picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_arrow" />
+
+    <Button
+        android:id="@+id/btn_Exit_Pumped"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="392dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_outlined"
+        android:text="Exit"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Pumped"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StationImage_pumped" />
+
+    <Button
+        android:id="@+id/btn_Pumped"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="392dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_bg"
+        android:text="Pumped"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/btn_Exit_Pumped"
+        app:layout_constraintTop_toBottomOf="@+id/StationImage_pumped" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -117,8 +117,8 @@ public class FragmentHome extends Fragment  implements RecyclerViewInterface {
             @Override
             public void onFailure(Call<List<FuelStop>> call, Throwable t) {
 
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                System.out.println(t.getMessage());
+//                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                System.out.println(t.getMessage());
             }
         });
 

@@ -1,5 +1,6 @@
 package com.example.ead_project_frontend.ui.DbHandler;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.example.ead_project_frontend.config.Session;
 
 public class DBHandler extends SQLiteOpenHelper {
     //*setting variable for Login and this value will be the database name:
@@ -104,14 +107,14 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //-------Retrieve-----------------
-    public Cursor getUserRegistration() {
-        // it get the data repository in write mode
-        SQLiteDatabase DB = this.getWritableDatabase();
-
-        //Cursor is like selecting the row
-        Cursor cursor  = DB.rawQuery("Select * from Registration", null);
-        return cursor;
-    }
+//    public Cursor getUserRegistration() {
+//        // it get the data repository in write mode
+//        SQLiteDatabase DB = this.getWritableDatabase();
+//
+//        //Cursor is like selecting the row
+//        Cursor cursor  = DB.rawQuery("Select * from Registration", null);
+//        return cursor;
+//    }
 
     //**********************************************Login*****************************************************************
     public Boolean checkUsername (String userName) {
@@ -132,12 +135,31 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
     }
 
+    @SuppressLint("Range")
     public Boolean checkUserCredentials (String email, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Registration where email = ? and password = ?", new String[] { email, password });
-        if (cursor.getCount() > 0)
+        Cursor cursor = DB.rawQuery("Select * from Registration where email = ? and password = ?", new String[]{email, password});
+        if (cursor.getCount() > 0){
+            if (cursor.moveToFirst()){
+                Session.VECHILE_TYPE = cursor.getString(cursor.getColumnIndex("vehicleType"));
+                System.out.println(Session.VECHILE_TYPE);
+            }
             return true;
+        }
         else
             return false;
     }
+
+    //******************Profile view Retreive *********************************
+
+    public Cursor getUserRegistration(String email, String nic) {
+        // it get the data repository in write mode
+        SQLiteDatabase DB = this.getWritableDatabase();
+
+        //Cursor is like selecting the row
+        Cursor cursor  = DB.rawQuery("Select * from Registration where email = ? and nic = ? " , new String[] { email , nic });
+        return cursor;
+    }
 }
+
+
