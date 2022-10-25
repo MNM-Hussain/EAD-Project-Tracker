@@ -10,9 +10,11 @@ import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.ead_project_frontend.R;
+import com.example.ead_project_frontend.config.SysConfig;
 import com.example.ead_project_frontend.ui.fragment.FragmentHome;
 import com.example.ead_project_frontend.ui.fragment.FragmentProfile;
 import com.example.ead_project_frontend.ui.login.Login;
+import com.example.ead_project_frontend.ui.updateProfile.UpdateProfile;
 
 public class NavigationBar extends AppCompatActivity {
 
@@ -65,7 +67,6 @@ public class NavigationBar extends AppCompatActivity {
                          name ="this profile page where user item are here";
                          select_fragment = new FragmentProfile();
                          break;
-
                      case ID_LOGOUT:
                          Intent intent = new Intent(NavigationBar.this, Login.class);
                          startActivity(intent);

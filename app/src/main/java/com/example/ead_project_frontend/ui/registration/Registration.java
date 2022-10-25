@@ -30,7 +30,7 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        // Initializing the ediText with Id
+        // Initializing the editText with Id
         userName = findViewById(R.id.input_userName);
         nic = findViewById(R.id.input_NIC);
         email = findViewById(R.id.input_email_registration);
@@ -70,7 +70,7 @@ public class Registration extends AppCompatActivity {
                 if (nameText.equals("") || nicText.equals("") || emailText.equals("") || passwordText.equals("") || vehicleTypeText.equals(""))
                     Toast.makeText(Registration.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 else
-                    // if there are no any existing user then the data will be inserted
+                    // if there are no any existing user with same nic and emailText then the data will be inserted
                     if (checkExistingUser == false) {
                         Boolean InsertRegistrationData = DB.insertUserRegistration(nameText, nicText, emailText, passwordText, vehicleTypeText);
                         if (InsertRegistrationData == true) {

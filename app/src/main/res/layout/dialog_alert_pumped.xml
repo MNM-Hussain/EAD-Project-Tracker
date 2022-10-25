@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/AlertMessage_pumped"
+        android:layout_width="416dp"
+        android:layout_height="119dp"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:text="Can you Insert the number of litres you pumped?"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input_numberOfLitres"
+        android:layout_width="363dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="6dp"
+        android:ems="10"
+        android:background="@drawable/round_border"
+        android:hint="  Number of Litres"
+        android:drawableStart="@drawable/ic_fuel_litre"
+        android:inputType="number"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AlertMessage_pumped" />
+
+    <Button
+        android:id="@+id/btn_CancelInsertPump"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/button_outlined"
+        android:text="Cancel"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toStartOf="@+id/btn_ConfirmInsertPump"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_numberOfLitres" />
+
+    <Button
+        android:id="@+id/btn_ConfirmInsertPump"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/rounded_bg"
+        android:text="Confirm"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_CancelInsertPump"
+        app:layout_constraintTop_toBottomOf="@+id/input_numberOfLitres" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
