@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
     private Button btn_Exit_Pumped, btn_Pumped;
     private Dialog dialog;
     private TextView back_arrow;
-
+    private EditText fuelAmount;
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
@@ -32,6 +33,9 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_pumped_fuel_status);
+
+        savedInstanceState = getIntent().getExtras();
+        String ID = savedInstanceState.getString("ID");
 
         // Initializing with Id
         back_arrow = findViewById(R.id.back_arrow);
@@ -43,6 +47,11 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UpdatePumpedFuelStatus.this,UpdateArrivalStation.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ID",ID );
+                intent.putExtras(bundle);
+                startActivity(intent);
+
                 startActivity(intent);
             }
         });
@@ -84,6 +93,9 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
                     System.out.println(pauseOffset + "difference time");
                     running = false;
                 }
+
+                //api call
+
             }
         });
 
@@ -97,10 +109,15 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
 
         //Created the Dialog here
         dialog = new Dialog(this);
+        fuelAmount=dialog.findViewById(R.id.input_numberOfLitres);
+
+
+
         dialog.setContentView(R.layout.dialog_alert_pumped);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_flow_background));
+
         }
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false); //Optional
@@ -114,7 +131,12 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(UpdatePumpedFuelStatus.this, "your pumped is confirmed", Toast.LENGTH_SHORT).show();
+                //System.out.println(fuelAmount.getText().toString());
                 dialog.dismiss();
+
+                //api call
+
+
                 //send to pumped status page from popup
                 Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);
                 startActivity(intent);
