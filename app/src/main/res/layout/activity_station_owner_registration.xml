@@ -9,10 +9,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.registration.Registration">
+        tools:context=".ui.stationOwnerRegistration.StationOwnerRegistration">
 
         <View
-            android:id="@+id/registration_upperView"
+            android:id="@+id/Station_registration_upperView"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:background="#750000"
@@ -21,16 +21,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/upperDesign_registration"
+            android:id="@+id/upperDesign_Station_registration"
             android:layout_width="0dp"
             android:layout_height="140dp"
             android:background="@drawable/ic_wave_registration_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registration_upperView" />
+            app:layout_constraintTop_toBottomOf="@+id/Station_registration_upperView" />
 
         <ImageView
-            android:id="@+id/upperLogo_registration"
+            android:id="@+id/upperLogo_Station_registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -41,7 +41,7 @@
             app:srcCompat="@drawable/ic_logo" />
 
         <TextView
-            android:id="@+id/topText_registration"
+            android:id="@+id/topText_Station_registration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -50,22 +50,13 @@
             android:textColor="@android:color/white"
             android:textSize="36sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/upperLogo_registration"
+            app:layout_constraintEnd_toStartOf="@+id/upperLogo_Station_registration"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/registration_upperView"
+            app:layout_constraintStart_toStartOf="@+id/Station_registration_upperView"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--    <ScrollView-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="match_parent">-->
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:orientation="vertical" />-->
-
         <EditText
-            android:id="@+id/input_userName"
+            android:id="@+id/input_Station_userName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -80,28 +71,46 @@
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/upperDesign_registration" />
+            app:layout_constraintTop_toBottomOf="@+id/upperDesign_Station_registration" />
 
         <EditText
-            android:id="@+id/input_NIC"
+            android:id="@+id/input_Station_Name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round_border"
-            android:drawableStart="@drawable/ic_nic"
+            android:drawableStart="@drawable/ic_station_name"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="@string/userNIC"
+            android:hint="Station Name"
             android:inputType="text"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_userName" />
+            app:layout_constraintTop_toBottomOf="@+id/input_Station_userName" />
 
         <EditText
-            android:id="@+id/input_email_registration"
+            android:id="@+id/input_station_branch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/round_border"
+            android:drawableStart="@drawable/ic_station_branch"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Station Branch"
+            android:inputType="text"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_Station_Name" />
+
+        <EditText
+            android:id="@+id/input_Station_email_registration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -116,10 +125,10 @@
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_NIC" />
+            app:layout_constraintTop_toBottomOf="@+id/input_station_branch" />
 
         <EditText
-            android:id="@+id/input_Password_registration"
+            android:id="@+id/input_Station_Password_registration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -134,96 +143,49 @@
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_email_registration" />
+            app:layout_constraintTop_toBottomOf="@+id/input_Station_email_registration" />
 
 
         <EditText
-            android:id="@+id/input_vehicleType"
+            android:id="@+id/input_station_ContactNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round_border"
-            android:drawableStart="@drawable/ic_vehicle_type"
+            android:drawableStart="@drawable/ic_contact_number"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="@string/userVehicleType"
+            android:hint="Contact Number"
             android:inputType="text"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_Password_registration" />
+            app:layout_constraintTop_toBottomOf="@+id/input_Station_Password_registration" />
 
-        <TextView
-            android:id="@+id/fuelTypeLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/userFuelType"
-            android:textColor="#750000"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_vehicleType" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup_fuelType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fuelTypeLabel">
-
-            <RadioButton
-                android:id="@+id/radio_btn_petrol_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/customizable_radio_button"
-                android:onClick="clickRadioButton"
-                android:text="Petrol"
-                android:textColor="#750000"
-                android:textSize="20sp"></RadioButton>
-
-            <RadioButton
-                android:id="@+id/radio_btn_Diesel_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:button="@drawable/customizable_radio_button"
-                android:onClick="clickRadioButton"
-                android:text="Diesel"
-                android:textColor="#750000"
-                android:textSize="20sp"></RadioButton>
-        </RadioGroup>
 
         <Button
-            android:id="@+id/Register_Cancel_button"
+            android:id="@+id/Station_Register_Cancel_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="200dp"
+            android:layout_marginEnd="3dp"
             android:background="@drawable/button_outlined"
             android:text="Cancel"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/Station_Register_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup_fuelType" />
+            app:layout_constraintTop_toBottomOf="@+id/input_station_ContactNumber" />
 
         <Button
-            android:id="@+id/Register_button"
+            android:id="@+id/Station_Register_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="3dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/rounded_bg"
@@ -232,9 +194,10 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup_fuelType" />
+            app:layout_constraintStart_toEndOf="@id/Station_Register_Cancel_button"
+            app:layout_constraintTop_toBottomOf="@+id/input_station_ContactNumber" />
 
         <!--    </ScrollView>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

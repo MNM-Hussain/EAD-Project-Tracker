@@ -29,17 +29,14 @@ public class UpdateProfile extends AppCompatActivity {
         Update_Cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Update_Cancel_button.setVisibility(View.GONE);
+//                Update_Cancel_button.setVisibility(View.GONE);
                 MoveToProfileActivity();
+                System.out.println("clicked");
             }
         });
     }
 
     public void MoveToProfileActivity () {
-//        NavigationBar navigationBar = new NavigationBar();
-//        FragmentProfile fragmentProfile = new FragmentProfile();
-//
-//        navigationBar.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragmentProfile);
 
         Intent intent = new Intent(this, NavigationBar.class);
         startActivity(intent);

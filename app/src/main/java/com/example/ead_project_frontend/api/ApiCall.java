@@ -51,7 +51,7 @@ public static FuelStop getstattioninformationByID(){
             System.out.println(fuelStop.getBusQueue() );
             System.out.println(fuelStop.getThreeWheelerQueue() );
 
-           SysConfig.fuelStop = new FuelStop(fuelStop.getId(),fuelStop.getName(),fuelStop.getLocation(),fuelStop.getFuelDiselCapacity(),fuelStop.getFuelPetrolCapacity(),fuelStop.getBikeQueue() ,fuelStop.getCarQueue(),fuelStop.getBusQueue(),fuelStop.getThreeWheelerQueue()  );
+           SysConfig.fuelStop = new FuelStop(fuelStop.getId(),fuelStop.getName(),fuelStop.getLocation(), fuelStop.getCompanyName(), fuelStop.getFuelDiselCapacity(),fuelStop.getFuelPetrolCapacity(),fuelStop.getBikeQueue() ,fuelStop.getCarQueue(),fuelStop.getBusQueue(),fuelStop.getThreeWheelerQueue()  );
 
 
 

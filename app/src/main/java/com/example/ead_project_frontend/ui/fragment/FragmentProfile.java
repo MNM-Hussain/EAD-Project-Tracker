@@ -1,9 +1,11 @@
 package com.example.ead_project_frontend.ui.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.ead_project_frontend.R;
+import com.example.ead_project_frontend.config.Session;
 import com.example.ead_project_frontend.config.SysConfig;
 import com.example.ead_project_frontend.ui.DbHandler.DBHandler;
 import com.example.ead_project_frontend.ui.login.Login;
@@ -47,33 +50,44 @@ public class FragmentProfile extends Fragment {
         //Initializing DB
         DB = new DBHandler(getActivity());
 
-        btn_editProfile = ( Button ) view.findViewById(R.id.btn_editProfile);
-        btn_deleteProfile = ( Button ) view.findViewById(R.id.btn_deleteProfile);
+        btn_editProfile = (Button) view.findViewById(R.id.btn_editProfile);
+        btn_deleteProfile = (Button) view.findViewById(R.id.btn_deleteProfile);
 
-        //****************************************************************
-        //setting the XML fields
-//        String nameText_get = getUsername.getText().toString();
-//        String emailText_get = getUserEmail.getText().toString();
-//        String nicText_get = getNIC.getText().toString();
-//        String VehicleTypeText_get = getVehicleType.getText().toString();
-//        String FuelTypeText_get = getFuelType.getText().toString();
-//        Cursor res = DB.getUserRegistration(emailText_get, nicText_get);
-//
-//        if (res.getCount() == 0) {
-//            Toast.makeText(getActivity(), "No any Users Exist", Toast.LENGTH_SHORT).show();
-//            return;
-//        } else {
-//
-//        }
-        //***********************************************************************
+        //************************Get the data of the login users to textView UI****************************************
+        Cursor cursor = DB.getUserRegistration();
 
+        if (cursor.getCount() == 0) {
+            Toast.makeText(getActivity(), "No any Users Exist", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            try {
+                getUsername.setText(Session.USER_NAME);
+                getNIC.setText(Session.NIC);
+                getUserEmail.setText(Session.USER_EMAIL);
+                getVehicleType.setText(Session.VECHILE_TYPE);
+                getFuelType.setText(Session.FUEL_TYPE);
+//                }
+            } catch (Exception exception) {
+                Log.e("Error is: ", exception.getMessage());
+            }
+        }
+
+        //*****************To move to update profile******************************************************
         // to move to edit profile page
         btn_editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("pressed");
-//                Intent intent = new Intent(getActivity(), UpdateProfile.class);
-//                getActivity().startActivity(intent);
+                Intent intent = new Intent(getActivity(), UpdateProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        //***********popup to confirm delete the Profile*********************
+        btn_deleteProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

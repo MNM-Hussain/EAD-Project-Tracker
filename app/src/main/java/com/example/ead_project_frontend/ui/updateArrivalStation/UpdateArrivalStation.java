@@ -15,34 +15,42 @@ import android.widget.Toast;
 
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.ui.login.Login;
+import com.example.ead_project_frontend.ui.navigation.NavigationBar;
 import com.example.ead_project_frontend.ui.updatePumpedFuelStatus.UpdatePumpedFuelStatus;
 
 public class UpdateArrivalStation extends AppCompatActivity {
     private Button btn_arrivedStation;
     private Dialog dialog;
-    private TextView stationBranch,queue,availablePetrol,availableDiesel;
+    private TextView back_arrow_arrival, stationBranch, queue, availablePetrol, availableDiesel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_arrival_station);
-        System.out.println("Inside oncreate method");
+        System.out.println("Inside onCreate method");
         savedInstanceState = getIntent().getExtras();
-
 
 
 //Extract the data…
 
         String ID = savedInstanceState.getString("ID");
 
-
-
         // Initializing with Id
+        back_arrow_arrival = findViewById(R.id.back_arrow_arrival);
         btn_arrivedStation = findViewById(R.id.btn_arrivedStation);
-        stationBranch=findViewById(R.id.getStationBranch);
-        queue=findViewById(R.id.getCurrentQueue);
-        availablePetrol=findViewById(R.id.getPetrolAvailability);
-        availableDiesel=findViewById(R.id.getDieselAvailability);
+        stationBranch = findViewById(R.id.getStationBranch);
+        queue = findViewById(R.id.getCurrentQueue);
+        availablePetrol = findViewById(R.id.getPetrolAvailability);
+        availableDiesel = findViewById(R.id.getDieselAvailability);
+
+        // send to previous page
+        back_arrow_arrival.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UpdateArrivalStation.this, NavigationBar.class);
+                startActivity(intent);
+            }
+        });
 
         //To get the popup
         btn_arrivedStation.setOnClickListener(new View.OnClickListener() {

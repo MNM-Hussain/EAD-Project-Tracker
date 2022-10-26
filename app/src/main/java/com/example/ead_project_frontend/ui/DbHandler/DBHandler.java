@@ -22,17 +22,17 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase DB) {
         //to execute sql query
-        DB.execSQL("create Table Registration (userName TEXT, nic TEXT primary key, email TEXT unique, password TEXT, vehicleType TEXT, fuelType TEXT)");
+        DB.execSQL("create Table UserRegistration (userName TEXT, nic TEXT primary key, email TEXT unique, password TEXT, vehicleType TEXT, fuelType TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
-        DB.execSQL("drop Table if exists Registration");
+        DB.execSQL("drop Table if exists UserRegistration");
     }
 
     //********************************************Registration**********************************************************************************
     //----------Insert----------------------------------------
-    public Boolean insertUserRegistration(String userName, String nic, String email, String password, String vehicleType) {
+    public Boolean insertUserRegistration(String userName, String nic, String email, String password, String vehicleType, String fuelType) {
         // it get the data repository in write mode
         SQLiteDatabase DB = this.getWritableDatabase();
 
@@ -43,10 +43,11 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("email", email);
         contentValues.put("password", password);
         contentValues.put("vehicleType", vehicleType);
-//        contentValues.put("fuelType", fuelType);
+        contentValues.put("fuelType", fuelType);
+//        contentValues.put("dieselType", dieselType);
 
         // to insert the new row returning the new primary key
-        long result = DB.insert("Registration", null, contentValues);
+        long result = DB.insert("UserRegistration", null, contentValues);
         if (result == -1){
             return false;
         } else {
@@ -119,7 +120,7 @@ public class DBHandler extends SQLiteOpenHelper {
     //**********************************************Login*****************************************************************
     public Boolean checkUsername (String userName) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Registration where userName = ?", new String[] {userName} );
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration where userName = ?", new String[] {userName} );
         if (cursor.getCount() > 0)
             return true;
         else
@@ -128,7 +129,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public Boolean checkExistingUser (String nic, String email) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Registration where nic = ? and email = ?", new String[] { nic, email } );
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration where nic = ? and email = ?", new String[] { nic, email } );
         if (cursor.getCount() > 0)
             return true;
         else
@@ -138,10 +139,14 @@ public class DBHandler extends SQLiteOpenHelper {
     @SuppressLint("Range")
     public Boolean checkUserCredentials (String email, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Registration where email = ? and password = ?", new String[]{email, password});
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration where email = ? and password = ?", new String[]{email, password});
         if (cursor.getCount() > 0){
             if (cursor.moveToFirst()){
+                Session.USER_NAME = cursor.getString(cursor.getColumnIndex("userName"));
+                Session.NIC = cursor.getString(cursor.getColumnIndex("nic"));
+                Session.USER_EMAIL = cursor.getString(cursor.getColumnIndex("email"));
                 Session.VECHILE_TYPE = cursor.getString(cursor.getColumnIndex("vehicleType"));
+                Session.FUEL_TYPE = cursor.getString(cursor.getColumnIndex("fuelType"));
                 System.out.println(Session.VECHILE_TYPE);
             }
             return true;
@@ -152,12 +157,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
     //******************Profile view Retreive *********************************
 
-    public Cursor getUserRegistration(String email, String nic) {
+    public Cursor getUserRegistration() {
         // it get the data repository in write mode
-        SQLiteDatabase DB = this.getWritableDatabase();
-
+//        SQLiteDatabase DB = this.getWritableDatabase();
+        SQLiteDatabase DB = this.getReadableDatabase();
         //Cursor is like selecting the row
-        Cursor cursor  = DB.rawQuery("Select * from Registration where email = ? and nic = ? " , new String[] { email , nic });
+        Cursor cursor  = DB.rawQuery("Select * from UserRegistration" , null);
         return cursor;
     }
 }

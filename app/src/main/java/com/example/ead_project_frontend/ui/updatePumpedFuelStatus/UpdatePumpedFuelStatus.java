@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.ui.login.Login;
+import com.example.ead_project_frontend.ui.navigation.NavigationBar;
 import com.example.ead_project_frontend.ui.updateArrivalStation.UpdateArrivalStation;
 
 public class UpdatePumpedFuelStatus extends AppCompatActivity {
@@ -115,7 +116,7 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
                 Toast.makeText(UpdatePumpedFuelStatus.this, "your pumped is confirmed", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
                 //send to pumped status page from popup
-                Intent intent = new Intent(UpdatePumpedFuelStatus.this, Login.class);
+                Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);
                 startActivity(intent);
 
                 //Stop the timer

@@ -6,4 +6,5 @@ public class Session {
     public static String VECHILE_TYPE;
     public static String NIC;
     public static String USER_EMAIL;
+    public static String FUEL_TYPE;
 }
