@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.ui.fragment.FragmentProfile;
 import com.example.ead_project_frontend.ui.login.Login;
+import com.example.ead_project_frontend.ui.navigation.NavigationBar;
 
 public class UpdateProfile extends AppCompatActivity {
     Button Update_Cancel_button, Update_button;
@@ -35,7 +36,13 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     public void MoveToProfileActivity () {
-        Intent intent = new Intent(this, Login.class);
+//        NavigationBar navigationBar = new NavigationBar();
+//        FragmentProfile fragmentProfile = new FragmentProfile();
+//
+//        navigationBar.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragmentProfile);
+
+        Intent intent = new Intent(this, NavigationBar.class);
         startActivity(intent);
+
     }
 }

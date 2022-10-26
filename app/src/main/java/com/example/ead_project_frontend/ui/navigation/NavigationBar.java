@@ -18,6 +18,8 @@ import com.example.ead_project_frontend.ui.updateProfile.UpdateProfile;
 
 public class NavigationBar extends AppCompatActivity {
 
+
+
     private final int ID_HOME=1;
     private final int ID_PROFILE=2;
     private final int ID_LOGOUT=3;
@@ -62,6 +64,7 @@ public class NavigationBar extends AppCompatActivity {
                      case ID_HOME:
                          name ="this is home page where user can able to search petrol shed";
                          select_fragment = new FragmentHome();
+
                          break;
                      case ID_PROFILE:
                          name ="this profile page where user item are here";
@@ -82,5 +85,10 @@ public class NavigationBar extends AppCompatActivity {
         });
 
 
+
+
+
     }
+
+
 }

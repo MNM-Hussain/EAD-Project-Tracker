@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ead_project_frontend.R;
@@ -19,14 +20,29 @@ import com.example.ead_project_frontend.ui.updatePumpedFuelStatus.UpdatePumpedFu
 public class UpdateArrivalStation extends AppCompatActivity {
     private Button btn_arrivedStation;
     private Dialog dialog;
+    private TextView stationBranch,queue,availablePetrol,availableDiesel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_arrival_station);
+        System.out.println("Inside oncreate method");
+        savedInstanceState = getIntent().getExtras();
+
+
+
+//Extract the data…
+
+        String ID = savedInstanceState.getString("ID");
+
+
 
         // Initializing with Id
         btn_arrivedStation = findViewById(R.id.btn_arrivedStation);
+        stationBranch=findViewById(R.id.getStationBranch);
+        queue=findViewById(R.id.getCurrentQueue);
+        availablePetrol=findViewById(R.id.getPetrolAvailability);
+        availableDiesel=findViewById(R.id.getDieselAvailability);
 
         //To get the popup
         btn_arrivedStation.setOnClickListener(new View.OnClickListener() {

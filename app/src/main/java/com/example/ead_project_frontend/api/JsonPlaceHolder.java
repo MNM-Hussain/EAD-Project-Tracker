@@ -11,4 +11,7 @@ public interface JsonPlaceHolder {
 
     @GET("FuelStop")
     Call<List<FuelStop>> getFuelStations();
+
+    @GET("FuelStop/{id}")
+    Call<FuelStop> getFuelStationbyID();
 }

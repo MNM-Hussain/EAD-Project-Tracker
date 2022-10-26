@@ -17,7 +17,7 @@ public class FuelStop {
 
     public int threeWheelerQueue;
 
-    public FuelStop(String id, String name, String location, String companyName, double fuelPetrolCapacity, double fuelDiselCapacity, int carQueue, int bikeQueue, int busQueue, int threeWheelerQueue) {
+    public FuelStop(String id, String name, String location, double fuelPetrolCapacity, double fuelDiselCapacity, int carQueue, int bikeQueue, int busQueue, int threeWheelerQueue) {
         this.id = id;
         this.name = name;
         this.location = location;

@@ -20,8 +20,10 @@ import com.example.ead_project_frontend.api.JsonPlaceHolder;
 import com.example.ead_project_frontend.config.SysConfig;
 import com.example.ead_project_frontend.model.FuelStop;
 import com.example.ead_project_frontend.ui.adapter.FuelStopRecyclerViewAdapter;
+import com.example.ead_project_frontend.ui.login.Login;
 import com.example.ead_project_frontend.ui.navigation.NavigationBar;
 import com.example.ead_project_frontend.ui.recyclerviewItemClick.RecyclerViewInterface;
+import com.example.ead_project_frontend.ui.updateArrivalStation.UpdateArrivalStation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,6 +156,29 @@ public class FragmentHome extends Fragment  implements RecyclerViewInterface {
         System.out.println(fuelStops.get(postion).getBikeQueue() );
         System.out.println(fuelStops.get(postion).getCarQueue() );
         System.out.println(fuelStops.get(postion).getBusQueue() );
+
+        double dcapacity=fuelStops.get(postion).getFuelDiselCapacity();
+        double pcapasity=fuelStops.get(postion).getFuelPetrolCapacity();
+        String dcap =Double.toString(dcapacity);
+        String pcap=Double.toString(pcapasity);
+        Intent intent = new Intent(getActivity(), UpdateArrivalStation.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("ID",fuelStops.get(postion).getId() );
+        bundle.putString("COMPANY_NAME",fuelStops.get(postion).getCompanyName());
+
+
+        bundle.putString("BRANCH",fuelStops.get(postion).getLocation() );
+        bundle.putString("DISEL_CAPASITY",dcap );
+        bundle.putString("PETROL_CAPASITY",pcap );
+        int bike =fuelStops.get(postion).getBikeQueue();
+        int car =fuelStops.get(postion).getCarQueue();
+        int bus =fuelStops.get(postion).getBusQueue();
+        int threewheeeler =fuelStops.get(postion).getThreeWheelerQueue();
+        int total = bike+car+bus+threewheeeler;
+        String totalcount =Integer.toString(total);
+        bundle.putString("TOTAL",totalcount );
+        intent.putExtras(bundle);
+        startActivity(intent);
 
 
     }
