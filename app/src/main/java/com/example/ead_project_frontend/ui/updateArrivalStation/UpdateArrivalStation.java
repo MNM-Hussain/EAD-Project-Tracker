@@ -32,8 +32,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UpdateArrivalStation extends AppCompatActivity {
     private Button btn_arrivedStation;
     private Dialog dialog;
-    private TextView back_arrow_arrival, stationBranch, queue, availablePetrol, availableDiesel,name;
-    private  String id;
+    private TextView back_arrow_arrival, stationBranch, queue, availablePetrol, availableDiesel, name;
+    private String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class UpdateArrivalStation extends AppCompatActivity {
         queue = findViewById(R.id.getCurrentQueue);
         availablePetrol = findViewById(R.id.getPetrolAvailability);
         availableDiesel = findViewById(R.id.getDieselAvailability);
-        name=findViewById(R.id.getStationName);
+        name = findViewById(R.id.getStationName);
 
 
 //Extract the data…
@@ -64,60 +65,59 @@ public class UpdateArrivalStation extends AppCompatActivity {
 
 
         JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-        Call<FuelStop> call =jsonPlaceHolder.getFuelStationbyID(ID);
+        Call<FuelStop> call = jsonPlaceHolder.getFuelStationbyID(ID);
         call.enqueue(new Callback<FuelStop>() {
             @Override
             public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     System.out.println("NOT SUCUSSFUL");
-                    SysConfig.API_MESSAGE="NOT SUCUSSFUL RESPONSE";
+                    SysConfig.API_MESSAGE = "NOT SUCUSSFUL RESPONSE";
                 }
-                FuelStop fuelStop =response.body();
+                FuelStop fuelStop = response.body();
                 System.out.println(fuelStop);
 
                 System.out.println(fuelStop.getCompanyName());
 
-                System.out.println(fuelStop.getId() );
-                System.out.println("INSIDE GET ONE"+fuelStop.getName() );
-                System.out.println(fuelStop.getLocation() );
-                System.out.println(fuelStop.getFuelDiselCapacity() );
-                System.out.println(fuelStop.getFuelPetrolCapacity() );
-                System.out.println(fuelStop.getBikeQueue() );
-                System.out.println(fuelStop.getCarQueue() );
-                System.out.println(fuelStop.getBusQueue() );
-                System.out.println(fuelStop.getThreeWheelerQueue() );
+                System.out.println(fuelStop.getId());
+                System.out.println("INSIDE GET ONE" + fuelStop.getName());
+                System.out.println(fuelStop.getLocation());
+                System.out.println(fuelStop.getFuelDiselCapacity());
+                System.out.println(fuelStop.getFuelPetrolCapacity());
+                System.out.println(fuelStop.getBikeQueue());
+                System.out.println(fuelStop.getCarQueue());
+                System.out.println(fuelStop.getBusQueue());
+                System.out.println(fuelStop.getThreeWheelerQueue());
 
                 //get total
-                int bike =fuelStop.getBikeQueue();
-                int car =fuelStop.getCarQueue();
-                int bus =fuelStop.getBusQueue();
-                int threewheeeler =fuelStop.getThreeWheelerQueue();
-                int total = bike+car+bus+threewheeeler;
-                String totalcount =Integer.toString(total);
+                int bike = fuelStop.getBikeQueue();
+                int car = fuelStop.getCarQueue();
+                int bus = fuelStop.getBusQueue();
+                int threewheeeler = fuelStop.getThreeWheelerQueue();
+                int total = bike + car + bus + threewheeeler;
+                String totalcount = Integer.toString(total);
 
-                SysConfig.fuelStop = new FuelStop(fuelStop.getId(),fuelStop.getName(),fuelStop.getLocation(), fuelStop.getCompanyName(), fuelStop.getFuelDiselCapacity(),fuelStop.getFuelPetrolCapacity(),fuelStop.getBikeQueue() ,fuelStop.getCarQueue(),fuelStop.getBusQueue(),fuelStop.getThreeWheelerQueue()  );
-                System.out.println("CALLING CLASS ASSIGNED "+SysConfig.fuelStop.getLocation() );
-                id=fuelStop.getId();
-                 stationBranch.setText(fuelStop.getLocation());
-                 queue.setText(totalcount);
-                 name.setText(fuelStop.getName());
-                 if(fuelStop.getFuelPetrolCapacity()==0){
-                     availablePetrol.setText("FINISHED");
-                 }else{
+                SysConfig.fuelStop = new FuelStop(fuelStop.getId(), fuelStop.getName(), fuelStop.getLocation(), fuelStop.getCompanyName(), fuelStop.getFuelDiselCapacity(), fuelStop.getFuelPetrolCapacity(), fuelStop.getBikeQueue(), fuelStop.getCarQueue(), fuelStop.getBusQueue(), fuelStop.getThreeWheelerQueue());
+                System.out.println("CALLING CLASS ASSIGNED " + SysConfig.fuelStop.getLocation());
+                id = fuelStop.getId();
+                stationBranch.setText(fuelStop.getLocation());
+                queue.setText(totalcount);
+                name.setText(fuelStop.getName());
+                if (fuelStop.getFuelPetrolCapacity() == 0) {
+                    availablePetrol.setText("FINISHED");
+                } else {
 
-                     availablePetrol.setText(Double.toString(fuelStop.getFuelPetrolCapacity())+"L");
-                 }
+                    availablePetrol.setText(Double.toString(fuelStop.getFuelPetrolCapacity()) + "L");
+                }
 
-                if(fuelStop.getFuelDiselCapacity()==0){
+                if (fuelStop.getFuelDiselCapacity() == 0) {
                     availableDiesel.setText("FINISHED");
-                }else{
+                } else {
 
-                    availableDiesel.setText(Double.toString(fuelStop.getFuelDiselCapacity())+"L");
+                    availableDiesel.setText(Double.toString(fuelStop.getFuelDiselCapacity()) + "L");
                 }
 
 
             }
-
 
 
             @Override
@@ -126,10 +126,6 @@ public class UpdateArrivalStation extends AppCompatActivity {
 //
             }
         });
-
-
-
-
 
 
         // send to previous page
@@ -173,7 +169,6 @@ public class UpdateArrivalStation extends AppCompatActivity {
                 //call api
 
 
-
                 dialog.dismiss();
 
                 ApiCall.incremenentQueue(ID, "car");
@@ -181,7 +176,7 @@ public class UpdateArrivalStation extends AppCompatActivity {
                 //send to pumped status page from popup
                 Intent intent = new Intent(UpdateArrivalStation.this, UpdatePumpedFuelStatus.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("ID",ID );
+                bundle.putString("ID", ID);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

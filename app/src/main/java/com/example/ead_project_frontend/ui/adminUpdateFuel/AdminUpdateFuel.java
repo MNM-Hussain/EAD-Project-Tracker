@@ -33,10 +33,11 @@ public class AdminUpdateFuel extends AppCompatActivity {
         input_arrivalTime_admin_fuel = findViewById(R.id.input_arrivalTime_admin_fuel);
         back_arrow_arrival = findViewById(R.id.back_arrow_arrival);
 
-        //setting listener and referred a tutorial to do this
+        //setting listener and referred a tutorial to do this reference [4]
         input_arrivalTime_admin_fuel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //reference [4]
                 TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
@@ -62,6 +63,7 @@ public class AdminUpdateFuel extends AppCompatActivity {
         });
     }
 
+    // method to listen the radio button
     public void clickRadioAdminUpdateFuelType(View view) {
         RadioGroup radioGroup = findViewById(R.id.radioGroup_fuelType_adminFuel);
         RadioButton radioButton = findViewById(radioGroup.getCheckedRadioButtonId());

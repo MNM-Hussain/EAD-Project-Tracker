@@ -103,7 +103,7 @@ public class Registration extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //To Navigate Home Page
+    //To Navigate back to Login once registered successfully
     public void MoveToHome() {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);

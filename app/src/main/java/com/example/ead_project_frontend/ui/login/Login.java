@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
         //Initializing DB
         DB = new DBHandler(this);
 
-        button  = (Button) findViewById(R.id.btn_Login);
+        button = (Button) findViewById(R.id.btn_Login);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
                 if (email_Text.equals("") || password_Text.equals(""))
                     Toast.makeText(Login.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 else {
-                    Boolean checkUser_credentials = DB.checkUserCredentials( email_Text, password_Text);
+                    Boolean checkUser_credentials = DB.checkUserCredentials(email_Text, password_Text);
                     if (checkUser_credentials == true) {
                         Toast.makeText(Login.this, "Login is successful! ", Toast.LENGTH_SHORT).show();
                         openHomePage();
@@ -56,11 +56,13 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public void openHomePage(){
+    //Move to to Homepage
+    public void openHomePage() {
         Intent intent = new Intent(this, NavigationBar.class);
         startActivity(intent);
     }
 
+    //Move to Registration Class
     public void MoveToRegistrationActivity(View view) {
         Intent intent = new Intent(this, Registration.class);
         startActivity(intent);

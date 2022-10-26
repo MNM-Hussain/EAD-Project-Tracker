@@ -11,9 +11,11 @@ import androidx.annotation.Nullable;
 
 import com.example.ead_project_frontend.config.Session;
 
+//reference [03]
 public class DBHandler extends SQLiteOpenHelper {
     //*setting variable for Login and this value will be the database name:
     public static final String DB_NAME = "UserDB.db";
+
     public DBHandler(Context context) {
         //Another Db name and version is mentioned
         super(context, "UserDB.db", null, 1);
@@ -48,7 +50,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // to insert the new row returning the new primary key
         long result = DB.insert("UserRegistration", null, contentValues);
-        if (result == -1){
+        if (result == -1) {
             return false;
         } else {
             return true;
@@ -70,7 +72,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("fuelType", fuelType);
 
         //Cursor is like selecting the row
-        Cursor cursor  = DB.rawQuery("Select * from Registration where nic = ?", new String[] {nic});
+        Cursor cursor = DB.rawQuery("Select * from Registration where nic = ?", new String[]{nic});
 
         if (cursor.getCount() > 0) {
 
@@ -92,11 +94,11 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase DB = this.getWritableDatabase();
 
         //Cursor is like selecting the row
-        Cursor cursor  = DB.rawQuery("Select * from Registration where nic = ?", new String[] {nic});
+        Cursor cursor = DB.rawQuery("Select * from Registration where nic = ?", new String[]{nic});
 
         if (cursor.getCount() > 0) {
             // Delete the table using NIC
-            long result = DB.delete("Registration","nic = ?", new String[]{nic});
+            long result = DB.delete("Registration", "nic = ?", new String[]{nic});
             if (result == -1) {
                 return false;
             } else {
@@ -118,18 +120,18 @@ public class DBHandler extends SQLiteOpenHelper {
 //    }
 
     //**********************************************Login*****************************************************************
-    public Boolean checkUsername (String userName) {
+    public Boolean checkUsername(String userName) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from UserRegistration where userName = ?", new String[] {userName} );
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration where userName = ?", new String[]{userName});
         if (cursor.getCount() > 0)
             return true;
         else
             return false;
     }
 
-    public Boolean checkExistingUser (String nic, String email) {
+    public Boolean checkExistingUser(String nic, String email) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from UserRegistration where nic = ? and email = ?", new String[] { nic, email } );
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration where nic = ? and email = ?", new String[]{nic, email});
         if (cursor.getCount() > 0)
             return true;
         else
@@ -137,11 +139,11 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public Boolean checkUserCredentials (String email, String password) {
+    public Boolean checkUserCredentials(String email, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery("Select * from UserRegistration where email = ? and password = ?", new String[]{email, password});
-        if (cursor.getCount() > 0){
-            if (cursor.moveToFirst()){
+        if (cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
                 Session.USER_NAME = cursor.getString(cursor.getColumnIndex("userName"));
                 Session.NIC = cursor.getString(cursor.getColumnIndex("nic"));
                 Session.USER_EMAIL = cursor.getString(cursor.getColumnIndex("email"));
@@ -150,8 +152,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 System.out.println(Session.VECHILE_TYPE);
             }
             return true;
-        }
-        else
+        } else
             return false;
     }
 
@@ -162,7 +163,7 @@ public class DBHandler extends SQLiteOpenHelper {
 //        SQLiteDatabase DB = this.getWritableDatabase();
         SQLiteDatabase DB = this.getReadableDatabase();
         //Cursor is like selecting the row
-        Cursor cursor  = DB.rawQuery("Select * from UserRegistration" , null);
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration", null);
         return cursor;
     }
 }

@@ -50,6 +50,7 @@ public class FragmentProfile extends Fragment {
         //Initializing DB
         DB = new DBHandler(getActivity());
 
+        //Initializing Button
         btn_editProfile = (Button) view.findViewById(R.id.btn_editProfile);
         btn_deleteProfile = (Button) view.findViewById(R.id.btn_deleteProfile);
 

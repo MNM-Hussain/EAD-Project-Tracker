@@ -35,7 +35,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragmentHome extends Fragment  implements RecyclerViewInterface {
+public class FragmentHome extends Fragment implements RecyclerViewInterface {
 
     RecyclerView recyclerView;
     List<FuelStop> fuelStops;
@@ -44,10 +44,10 @@ public class FragmentHome extends Fragment  implements RecyclerViewInterface {
 
     @Nullable
     @Override
-    public View onCreateView( @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         recyclerViewInterface = this;
-        return inflater.inflate(R.layout.fragment_home,container,false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
 
 
     }
@@ -57,20 +57,19 @@ public class FragmentHome extends Fragment  implements RecyclerViewInterface {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.fuelStopRecyclerView);
         searchView = view.findViewById(R.id.search_bar);
-         searchView.clearFocus();
-         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-             @Override
-             public boolean onQueryTextSubmit(String query) {
-                 return false;
-             }
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-             @Override
-             public boolean onQueryTextChange(String newText) {
-                 filterFuelStation(newText);
-                 return true;
-             }
-         });
-
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterFuelStation(newText);
+                return true;
+            }
+        });
 
 
         //handling API call
@@ -81,38 +80,38 @@ public class FragmentHome extends Fragment  implements RecyclerViewInterface {
 
 
         JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-        Call<List<FuelStop>> call =jsonPlaceHolder.getFuelStations();
+        Call<List<FuelStop>> call = jsonPlaceHolder.getFuelStations();
         call.enqueue(new Callback<List<FuelStop>>() {
             @Override
             public void onResponse(Call<List<FuelStop>> call, Response<List<FuelStop>> response) {
-              if(!response.isSuccessful()){
-                  Toast.makeText(getActivity(), "failed response", Toast.LENGTH_SHORT).show();
-              }
-              fuelStops =response.body();
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getActivity(), "failed response", Toast.LENGTH_SHORT).show();
+                }
+                fuelStops = response.body();
                 System.out.println(fuelStops);
                 System.out.println(fuelStops.size());
                 System.out.println(fuelStops.get(1).getCompanyName());
-                System.out.println(fuelStops.get(1).getId() );
-                System.out.println(fuelStops.get(1).getName() );
-                System.out.println(fuelStops.get(1).getLocation() );
-                System.out.println(fuelStops.get(1).getFuelDiselCapacity() );
-                System.out.println(fuelStops.get(1).getFuelPetrolCapacity() );
-                System.out.println(fuelStops.get(1).getBikeQueue() );
-                System.out.println(fuelStops.get(1).getCarQueue() );
-                System.out.println(fuelStops.get(1).getBusQueue() );
-                System.out.println(fuelStops.get(1).getThreeWheelerQueue() );
+                System.out.println(fuelStops.get(1).getId());
+                System.out.println(fuelStops.get(1).getName());
+                System.out.println(fuelStops.get(1).getLocation());
+                System.out.println(fuelStops.get(1).getFuelDiselCapacity());
+                System.out.println(fuelStops.get(1).getFuelPetrolCapacity());
+                System.out.println(fuelStops.get(1).getBikeQueue());
+                System.out.println(fuelStops.get(1).getCarQueue());
+                System.out.println(fuelStops.get(1).getBusQueue());
+                System.out.println(fuelStops.get(1).getThreeWheelerQueue());
 
                 //attach adapter
 
 
-                    if (fuelStops != null && fuelStops.size() > 0) {
-                        FuelStopRecyclerViewAdapter fuelStopRecyclerViewAdapter = new FuelStopRecyclerViewAdapter(recyclerViewInterface,getActivity(), fuelStops);
-                        recyclerView.setAdapter(fuelStopRecyclerViewAdapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                if (fuelStops != null && fuelStops.size() > 0) {
+                    FuelStopRecyclerViewAdapter fuelStopRecyclerViewAdapter = new FuelStopRecyclerViewAdapter(recyclerViewInterface, getActivity(), fuelStops);
+                    recyclerView.setAdapter(fuelStopRecyclerViewAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                    } else {
-                        System.out.println("cant load fuel stops");
-                    }
+                } else {
+                    System.out.println("cant load fuel stops");
+                }
 
             }
 
@@ -130,15 +129,15 @@ public class FragmentHome extends Fragment  implements RecyclerViewInterface {
     }
 
     private void filterFuelStation(String newText) {
-    List<FuelStop> fuelStopslist = new ArrayList<>();
-        for (FuelStop fuel: fuelStops) {
-            if(fuel.getLocation().toLowerCase().contains(newText.toLowerCase())){
+        List<FuelStop> fuelStopslist = new ArrayList<>();
+        for (FuelStop fuel : fuelStops) {
+            if (fuel.getLocation().toLowerCase().contains(newText.toLowerCase())) {
                 fuelStopslist.add(fuel);
             }
         }
 
-        if(fuelStopslist.isEmpty()){
-            Toast.makeText(getActivity(),"No item found",Toast.LENGTH_SHORT).show();
+        if (fuelStopslist.isEmpty()) {
+            Toast.makeText(getActivity(), "No item found", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -148,35 +147,35 @@ public class FragmentHome extends Fragment  implements RecyclerViewInterface {
     public void onItemClick(int postion) {
 
         System.out.println(fuelStops.get(postion).getCompanyName());
-        System.out.println(fuelStops.get(postion).getId() );
-        System.out.println(fuelStops.get(postion).getName() );
-        System.out.println(fuelStops.get(postion).getLocation() );
-        System.out.println(fuelStops.get(postion).getFuelDiselCapacity() );
-        System.out.println(fuelStops.get(postion).getFuelPetrolCapacity() );
-        System.out.println(fuelStops.get(postion).getBikeQueue() );
-        System.out.println(fuelStops.get(postion).getCarQueue() );
-        System.out.println(fuelStops.get(postion).getBusQueue() );
+        System.out.println(fuelStops.get(postion).getId());
+        System.out.println(fuelStops.get(postion).getName());
+        System.out.println(fuelStops.get(postion).getLocation());
+        System.out.println(fuelStops.get(postion).getFuelDiselCapacity());
+        System.out.println(fuelStops.get(postion).getFuelPetrolCapacity());
+        System.out.println(fuelStops.get(postion).getBikeQueue());
+        System.out.println(fuelStops.get(postion).getCarQueue());
+        System.out.println(fuelStops.get(postion).getBusQueue());
 
-        double dcapacity=fuelStops.get(postion).getFuelDiselCapacity();
-        double pcapasity=fuelStops.get(postion).getFuelPetrolCapacity();
-        String dcap =Double.toString(dcapacity);
-        String pcap=Double.toString(pcapasity);
+        double dcapacity = fuelStops.get(postion).getFuelDiselCapacity();
+        double pcapasity = fuelStops.get(postion).getFuelPetrolCapacity();
+        String dcap = Double.toString(dcapacity);
+        String pcap = Double.toString(pcapasity);
         Intent intent = new Intent(getActivity(), UpdateArrivalStation.class);
         Bundle bundle = new Bundle();
-        bundle.putString("ID",fuelStops.get(postion).getId() );
-        bundle.putString("COMPANY_NAME",fuelStops.get(postion).getCompanyName());
+        bundle.putString("ID", fuelStops.get(postion).getId());
+        bundle.putString("COMPANY_NAME", fuelStops.get(postion).getCompanyName());
 
 
-        bundle.putString("BRANCH",fuelStops.get(postion).getLocation() );
-        bundle.putString("DISEL_CAPASITY",dcap );
-        bundle.putString("PETROL_CAPASITY",pcap );
-        int bike =fuelStops.get(postion).getBikeQueue();
-        int car =fuelStops.get(postion).getCarQueue();
-        int bus =fuelStops.get(postion).getBusQueue();
-        int threewheeeler =fuelStops.get(postion).getThreeWheelerQueue();
-        int total = bike+car+bus+threewheeeler;
-        String totalcount =Integer.toString(total);
-        bundle.putString("TOTAL",totalcount );
+        bundle.putString("BRANCH", fuelStops.get(postion).getLocation());
+        bundle.putString("DISEL_CAPASITY", dcap);
+        bundle.putString("PETROL_CAPASITY", pcap);
+        int bike = fuelStops.get(postion).getBikeQueue();
+        int car = fuelStops.get(postion).getCarQueue();
+        int bus = fuelStops.get(postion).getBusQueue();
+        int threewheeeler = fuelStops.get(postion).getThreeWheelerQueue();
+        int total = bike + car + bus + threewheeeler;
+        String totalcount = Integer.toString(total);
+        bundle.putString("TOTAL", totalcount);
         intent.putExtras(bundle);
         startActivity(intent);
 

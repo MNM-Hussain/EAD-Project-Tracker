@@ -12,11 +12,12 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.ui.login.Login;
 
+//reference [02]
 public class SplashScreen extends AppCompatActivity {
 
     private static int NEXT_SCREEN = 7000;
 
-//    ImageView splashLogo, bgImage;
+    //    ImageView splashLogo, bgImage;
     TextView logo_Name;
     LottieAnimationView lottieAnimationView;
 
@@ -25,14 +26,11 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-//        splashLogo = findViewById(R.id.splashLogo);
+        //Initializing with ID
         logo_Name = findViewById(R.id.LogoName);
-//        bgImage = findViewById(R.id.splash_bg);
         lottieAnimationView = findViewById(R.id.splashAnimation);
 
-
-//        bgImage.animate().translationY(-1600).setDuration(3000).setStartDelay(6000);
-//        splashLogo.animate().translationY(1400).setDuration(2000).setStartDelay(5000);
+        //animation
         logo_Name.animate().translationY(1400).setDuration(3000).setStartDelay(6000);
         lottieAnimationView.animate().translationY(1400).setDuration(3000).setStartDelay(6000);
 

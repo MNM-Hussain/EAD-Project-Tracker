@@ -46,9 +46,9 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
         back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UpdatePumpedFuelStatus.this,UpdateArrivalStation.class);
+                Intent intent = new Intent(UpdatePumpedFuelStatus.this, UpdateArrivalStation.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("ID",ID );
+                bundle.putString("ID", ID);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -56,7 +56,7 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
             }
         });
 
-        //Initializing timer
+        //Initializing timer and this was referred by a tutorial [5]
         chronometer = findViewById(R.id.chronometer);
         chronometer.setFormat("Wait-Time: %s");
         chronometer.setBase(SystemClock.elapsedRealtime());
@@ -109,8 +109,7 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
 
         //Created the Dialog here
         dialog = new Dialog(this);
-        fuelAmount=dialog.findViewById(R.id.input_numberOfLitres);
-
+        fuelAmount = dialog.findViewById(R.id.input_numberOfLitres);
 
 
         dialog.setContentView(R.layout.dialog_alert_pumped);

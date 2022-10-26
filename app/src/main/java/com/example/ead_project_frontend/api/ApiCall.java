@@ -19,58 +19,54 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiCall {
 
 
-public static void getstattioninformationByID(String id){
-    //handling API call
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(SysConfig.API_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    public static void getstattioninformationByID(String id) {
+        //handling API call
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SysConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
 
-    JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-    Call<FuelStop> call =jsonPlaceHolder.getFuelStationbyID(id);
-    call.enqueue(new Callback<FuelStop>() {
-        @Override
-        public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
-            if(!response.isSuccessful()){
-                System.out.println("NOT SUCUSSFUL");
-                SysConfig.API_MESSAGE="NOT SUCUSSFUL RESPONSE";
+        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
+        Call<FuelStop> call = jsonPlaceHolder.getFuelStationbyID(id);
+        call.enqueue(new Callback<FuelStop>() {
+            @Override
+            public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
+                if (!response.isSuccessful()) {
+                    System.out.println("NOT SUCUSSFUL");
+                    SysConfig.API_MESSAGE = "NOT SUCUSSFUL RESPONSE";
+                }
+                FuelStop fuelStop = response.body();
+                System.out.println(fuelStop);
+
+                System.out.println(fuelStop.getCompanyName());
+
+                System.out.println(fuelStop.getId());
+                System.out.println("INSIDE GET ONE" + fuelStop.getName());
+                System.out.println(fuelStop.getLocation());
+                System.out.println(fuelStop.getFuelDiselCapacity());
+                System.out.println(fuelStop.getFuelPetrolCapacity());
+                System.out.println(fuelStop.getBikeQueue());
+                System.out.println(fuelStop.getCarQueue());
+                System.out.println(fuelStop.getBusQueue());
+                System.out.println(fuelStop.getThreeWheelerQueue());
+
+                SysConfig.fuelStop = new FuelStop(fuelStop.getId(), fuelStop.getName(), fuelStop.getLocation(), fuelStop.getCompanyName(), fuelStop.getFuelDiselCapacity(), fuelStop.getFuelPetrolCapacity(), fuelStop.getBikeQueue(), fuelStop.getCarQueue(), fuelStop.getBusQueue(), fuelStop.getThreeWheelerQueue());
+                System.out.println("CALLING CLASS ASSIGNED " + SysConfig.fuelStop.getLocation());
+
             }
-           FuelStop fuelStop =response.body();
-            System.out.println(fuelStop);
 
-            System.out.println(fuelStop.getCompanyName());
-
-            System.out.println(fuelStop.getId() );
-            System.out.println("INSIDE GET ONE"+fuelStop.getName() );
-            System.out.println(fuelStop.getLocation() );
-            System.out.println(fuelStop.getFuelDiselCapacity() );
-            System.out.println(fuelStop.getFuelPetrolCapacity() );
-            System.out.println(fuelStop.getBikeQueue() );
-            System.out.println(fuelStop.getCarQueue() );
-            System.out.println(fuelStop.getBusQueue() );
-            System.out.println(fuelStop.getThreeWheelerQueue() );
-
-           SysConfig.fuelStop = new FuelStop(fuelStop.getId(),fuelStop.getName(),fuelStop.getLocation(), fuelStop.getCompanyName(), fuelStop.getFuelDiselCapacity(),fuelStop.getFuelPetrolCapacity(),fuelStop.getBikeQueue() ,fuelStop.getCarQueue(),fuelStop.getBusQueue(),fuelStop.getThreeWheelerQueue()  );
-            System.out.println("CALLING CLASS ASSIGNED "+SysConfig.fuelStop.getLocation() );
-
-
-
-        }
-
-
-
-        @Override
-        public void onFailure(Call<FuelStop> call, Throwable t) {
+            @Override
+            public void onFailure(Call<FuelStop> call, Throwable t) {
 
 //
-        }
-    });
+            }
+        });
 
 
-}
+    }
 
-    public static void incremenentQueue(String id,String vechiletype){
+    public static void incremenentQueue(String id, String vechiletype) {
         {
             //handling API call
             Retrofit retrofit = new Retrofit.Builder()
@@ -80,20 +76,18 @@ public static void getstattioninformationByID(String id){
 
 
             JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-            Call<FuelStop> call =jsonPlaceHolder.patchqueue(id,vechiletype.toLowerCase());
+            Call<FuelStop> call = jsonPlaceHolder.patchqueue(id, vechiletype.toLowerCase());
             call.enqueue(new Callback<FuelStop>() {
                 @Override
                 public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
-                    if(!response.isSuccessful()){
+                    if (!response.isSuccessful()) {
                         System.out.println("NOT SUCUSSFUL");
-                        SysConfig.API_MESSAGE="NOT SUCUSSFUL RESPONSE";
+                        SysConfig.API_MESSAGE = "NOT SUCUSSFUL RESPONSE";
                     }
-                    System.out.println(vechiletype+"incremented");
-
+                    System.out.println(vechiletype + "incremented");
 
 
                 }
-
 
 
                 @Override
@@ -107,7 +101,7 @@ public static void getstattioninformationByID(String id){
         }
     }
 
-    public static void decrementQueue(String id,String vechiletype){
+    public static void decrementQueue(String id, String vechiletype) {
         {
             //handling API call
             Retrofit retrofit = new Retrofit.Builder()
@@ -117,20 +111,18 @@ public static void getstattioninformationByID(String id){
 
 
             JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-            Call<FuelStop> call =jsonPlaceHolder.patchqueue(id,vechiletype.toLowerCase());
+            Call<FuelStop> call = jsonPlaceHolder.patchqueue(id, vechiletype.toLowerCase());
             call.enqueue(new Callback<FuelStop>() {
                 @Override
                 public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
-                    if(!response.isSuccessful()){
+                    if (!response.isSuccessful()) {
                         System.out.println("NOT SUCUSSFUL");
-                        SysConfig.API_MESSAGE="NOT SUCUSSFUL RESPONSE";
+                        SysConfig.API_MESSAGE = "NOT SUCUSSFUL RESPONSE";
                     }
-                    System.out.println(vechiletype+"incremented");
-
+                    System.out.println(vechiletype + "incremented");
 
 
                 }
-
 
 
                 @Override

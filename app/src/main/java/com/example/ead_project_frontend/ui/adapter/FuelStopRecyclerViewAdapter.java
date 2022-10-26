@@ -18,7 +18,7 @@ import com.example.ead_project_frontend.ui.recyclerviewItemClick.RecyclerViewInt
 import java.util.List;
 
 public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRecyclerViewAdapter.MyViewHolder> {
-    private  final RecyclerViewInterface recyclerViewInterface;
+    private final RecyclerViewInterface recyclerViewInterface;
     Context context;
     List<FuelStop> fuelStops;
 
@@ -31,34 +31,34 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
     @NonNull
     @Override
     public FuelStopRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater =LayoutInflater.from(context);
-        View view =inflater.inflate(R.layout.recycler_view_row_ceypetco,parent,false);
-        return new FuelStopRecyclerViewAdapter.MyViewHolder(view,recyclerViewInterface);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.recycler_view_row_ceypetco, parent, false);
+        return new FuelStopRecyclerViewAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FuelStopRecyclerViewAdapter.MyViewHolder holder, int position) {
-      //get total
-        int bike =fuelStops.get(position).getBikeQueue();
-        int car =fuelStops.get(position).getCarQueue();
-        int bus =fuelStops.get(position).getBusQueue();
-        int threewheeeler =fuelStops.get(position).getThreeWheelerQueue();
-        int total = bike+car+bus+threewheeeler;
-        String totalcount =Integer.toString(total);
+        //get total
+        int bike = fuelStops.get(position).getBikeQueue();
+        int car = fuelStops.get(position).getCarQueue();
+        int bus = fuelStops.get(position).getBusQueue();
+        int threewheeeler = fuelStops.get(position).getThreeWheelerQueue();
+        int total = bike + car + bus + threewheeeler;
+        String totalcount = Integer.toString(total);
 
         //get provider
-        String fuelProvider =fuelStops.get(position).getCompanyName();
+        String fuelProvider = fuelStops.get(position).getCompanyName();
 
-      //assign values
+        //assign values
         holder.nameOfFuelstation.setText(fuelStops.get(position).getName());
         holder.locationOfFuelStation.setText(fuelStops.get(position).getLocation());
         holder.numberofQueue.setText(totalcount);
 
-        if(fuelProvider.equals("ceypetco")){
-           holder.fuelstationlogo.setImageResource(R.drawable.ceypetco);
-        }else if (fuelProvider.equals("ioc")){
+        if (fuelProvider.equals("ceypetco")) {
+            holder.fuelstationlogo.setImageResource(R.drawable.ceypetco);
+        } else if (fuelProvider.equals("ioc")) {
             holder.fuelstationlogo.setImageResource(R.drawable.ioc);
-        }else{
+        } else {
             holder.fuelstationlogo.setImageResource(R.drawable.laughs);
         }
 
@@ -67,13 +67,13 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
 
     @Override
     public int getItemCount() {
-        if(fuelStops.size()>0) {
+        if (fuelStops.size() > 0) {
             return fuelStops.size();
         }
         return 0;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView fuelstationlogo;
         TextView nameOfFuelstation;
@@ -81,23 +81,23 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
         TextView numberofQueue;
 
 
-        public MyViewHolder(@NonNull View itemView,RecyclerViewInterface recyclerViewInterface) {
+        public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             fuelstationlogo = itemView.findViewById(R.id.fuelProviderlogo);
-            nameOfFuelstation =itemView.findViewById(R.id.fuelStationName);
-            locationOfFuelStation=itemView.findViewById(R.id.fuelStationLocation);
-            numberofQueue=itemView.findViewById(R.id.totalNumber);
+            nameOfFuelstation = itemView.findViewById(R.id.fuelStationName);
+            locationOfFuelStation = itemView.findViewById(R.id.fuelStationLocation);
+            numberofQueue = itemView.findViewById(R.id.totalNumber);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(recyclerViewInterface != null){
-                       int postion =getAdapterPosition();
+                    if (recyclerViewInterface != null) {
+                        int postion = getAdapterPosition();
 
-                       if(postion != RecyclerView.NO_POSITION){
-                           recyclerViewInterface.onItemClick(postion);
-                       }
+                        if (postion != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(postion);
+                        }
                     }
                 }
             });

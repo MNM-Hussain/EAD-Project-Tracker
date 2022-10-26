@@ -53,9 +53,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/fuelStationName"
-                    android:text="@string/location"
                     android:layout_marginLeft="75dp"
                     android:layout_marginTop="5dp"
+                    android:text="@string/location"
                     android:textColor="#ffffff"
                     android:textSize="15sp"
                     android:textStyle="italic" />
@@ -90,15 +90,13 @@
                     android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/ceypetco"
-                    android:maxHeight="100dp" />
+                    android:maxHeight="100dp"
+                    app:srcCompat="@drawable/ceypetco" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

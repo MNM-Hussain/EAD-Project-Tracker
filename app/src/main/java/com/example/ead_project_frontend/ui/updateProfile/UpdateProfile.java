@@ -36,7 +36,7 @@ public class UpdateProfile extends AppCompatActivity {
         });
     }
 
-    public void MoveToProfileActivity () {
+    public void MoveToProfileActivity() {
 
         Intent intent = new Intent(this, NavigationBar.class);
         startActivity(intent);
