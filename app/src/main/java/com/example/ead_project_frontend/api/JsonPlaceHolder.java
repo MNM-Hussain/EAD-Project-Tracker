@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface JsonPlaceHolder {
 
@@ -25,9 +26,9 @@ public interface JsonPlaceHolder {
     @PATCH("FuelStop/updateQueuedecrement/{id}")
     Call<FuelStop> decrement(@Path("id") String id, @Body String vechiletype);
 
-    @PATCH("FuelStop/{id}")
-    Call<FuelStop> patchpetrolAvailablity(@Path("id") String id, @Body FuelStop fuelStop);
+    @PATCH("FuelStop/decreasepetrolfuelquantity/{id}")
+    Call<FuelStop> decrementFuel(@Path("id") String id, @Body String fueltype, @Query("fuelQuantity") double amount);
 
     @PATCH("FuelStop/{id}")
-    Call<FuelStop> patchDiselAvailability(@Path("id") String id, @Body FuelStop fuelStop);
+    Call<FuelStop> patchDiselAvailability(@Path("id") String id, @Body String fueltype,@Query("fuelQuantity") double amount);
 }

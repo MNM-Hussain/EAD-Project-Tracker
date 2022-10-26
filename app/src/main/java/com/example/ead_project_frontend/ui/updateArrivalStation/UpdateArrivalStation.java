@@ -171,7 +171,7 @@ public class UpdateArrivalStation extends AppCompatActivity {
 
                 dialog.dismiss();
 
-                ApiCall.incremenentQueue(ID, "car");
+                ApiCall.incremenentQueue(ID, Session.VECHILE_TYPE);
 
                 //send to pumped status page from popup
                 Intent intent = new Intent(UpdateArrivalStation.this, UpdatePumpedFuelStatus.class);
