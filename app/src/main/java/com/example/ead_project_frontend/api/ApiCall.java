@@ -117,7 +117,7 @@ public static void getstattioninformationByID(String id){
 
 
             JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-            Call<FuelStop> call =jsonPlaceHolder.patchqueue(id,vechiletype.toLowerCase());
+            Call<FuelStop> call =jsonPlaceHolder.decrement(id,vechiletype.toLowerCase());
             call.enqueue(new Callback<FuelStop>() {
                 @Override
                 public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
@@ -126,6 +126,44 @@ public static void getstattioninformationByID(String id){
                         SysConfig.API_MESSAGE="NOT SUCUSSFUL RESPONSE";
                     }
                     System.out.println(vechiletype+"incremented");
+
+
+
+                }
+
+
+
+                @Override
+                public void onFailure(Call<FuelStop> call, Throwable t) {
+                    System.out.println(t.getMessage());
+//
+                }
+            });
+
+
+        }
+    }
+
+
+    public static void decrementfuel(String id,String fuelType,double amount){
+        {
+            //handling API call
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(SysConfig.API_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+
+            JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
+            Call<FuelStop> call =jsonPlaceHolder.decrementFuel(id,fuelType,amount);
+            call.enqueue(new Callback<FuelStop>() {
+                @Override
+                public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
+                    if(!response.isSuccessful()){
+                        System.out.println("NOT SUCUSSFUL");
+                        SysConfig.API_MESSAGE="NOT SUCUSSFUL RESPONSE";
+                    }
+                    System.out.println(fuelType+"decremented");
 
 
 

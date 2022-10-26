@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ead_project_frontend.R;
+import com.example.ead_project_frontend.api.ApiCall;
+import com.example.ead_project_frontend.config.Session;
 import com.example.ead_project_frontend.ui.login.Login;
 import com.example.ead_project_frontend.ui.navigation.NavigationBar;
 import com.example.ead_project_frontend.ui.updateArrivalStation.UpdateArrivalStation;
@@ -95,6 +97,7 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
                 }
 
                 //api call
+                ApiCall.decrementQueue(ID, Session.VECHILE_TYPE);
 
             }
         });
@@ -135,7 +138,8 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
                 dialog.dismiss();
 
                 //api call
-
+                ApiCall.decrementQueue(ID,Session.VECHILE_TYPE);
+                ApiCall.decrementfuel(ID,Session.FUEL_TYPE,20);
 
                 //send to pumped status page from popup
                 Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);
