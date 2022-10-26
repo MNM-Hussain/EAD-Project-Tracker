@@ -21,8 +21,7 @@ public class Registration extends AppCompatActivity {
     private Button RegisterButton;
     private Button CancelRegisterButton;
     EditText userName, nic, email, password, vehicleType;
-    //    RadioGroup radioGroup;
-//    RadioButton radioButton, radio_btn_petrol_user, radio_btn_Diesel_user;
+
     //DbHandler class is called here
     DBHandler DB;
 
