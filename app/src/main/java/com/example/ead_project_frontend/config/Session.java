@@ -8,4 +8,12 @@ public class Session {
     public static String USER_EMAIL;
     public static String FUEL_TYPE;
     public static boolean IN_QUEUE;
+
+    public static String ADMIN_USER_NAME;
+    public static String ADMIN_USER_STATION_NAME;
+    public static String ADMIN_USER_STATION_BRANCH;
+    public static String ADMIN_USER_EMAIL;
+    public static String ADMIN_USER_PASSWORD;
+    public static String ADMIN_USER_CONTACT;
+
 }

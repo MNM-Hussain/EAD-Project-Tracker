@@ -36,12 +36,6 @@ public class Registration extends AppCompatActivity {
         email = findViewById(R.id.input_email_registration);
         password = findViewById(R.id.input_Password_registration);
         vehicleType = findViewById(R.id.input_vehicleType);
-//        radioGroup = findViewById(R.id.radioGroup_fuelType);
-//        radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
-
-        //*****************radioButtons*********************
-//        radio_btn_petrol_user = findViewById(R.id.radio_btn_petrol_user);
-//        radio_btn_Diesel_user = findViewById(R.id.radio_btn_Diesel_user);
 
         //Initializing DB
         DB = new DBHandler(this);
