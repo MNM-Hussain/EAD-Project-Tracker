@@ -73,6 +73,8 @@ public class StationOwnerRegistration extends AppCompatActivity {
                     // if there are no any existing user with same nic and emailText then the data will be inserted
                     if (checkExistingStationOwner == false) {
                         Boolean InsertStationOwnerRegistrationData = DB.insertStationOwnerRegistration(Station_userName_Text, Station_Name, station_branch, Station_email_registration, Station_Password_registration, station_ContactNumber);
+                        //api call
+
                         if (InsertStationOwnerRegistrationData == true) {
                             Toast.makeText(StationOwnerRegistration.this, "You have successfully Registered", Toast.LENGTH_SHORT).show();
                                MoveNextActivity();
@@ -82,6 +84,8 @@ public class StationOwnerRegistration extends AppCompatActivity {
                     } else {
                         Toast.makeText(StationOwnerRegistration.this, "Error!! Already an user exist, please sign-in", Toast.LENGTH_SHORT).show();
                     }
+
+
 
             }
         });

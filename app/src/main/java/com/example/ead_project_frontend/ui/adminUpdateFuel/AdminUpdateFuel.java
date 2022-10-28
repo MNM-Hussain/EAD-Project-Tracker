@@ -21,8 +21,9 @@ import com.example.ead_project_frontend.ui.stationOwnerRegistration.StationOwner
 import java.util.Locale;
 
 public class AdminUpdateFuel extends AppCompatActivity {
-    private EditText input_arrivalTime_admin_fuel;
+    private EditText input_arrivalTime_admin_fuel ,input_fuel_amount;
     private TextView back_arrow_arrival;
+
     int hour, minute;
 
     @Override
@@ -33,7 +34,7 @@ public class AdminUpdateFuel extends AppCompatActivity {
         //Initialize With ID
         input_arrivalTime_admin_fuel = findViewById(R.id.input_arrivalTime_admin_fuel);
         back_arrow_arrival = findViewById(R.id.back_arrow_arrival);
-
+        input_fuel_amount=findViewById(R.id.input_numberOfLitres_admin);
         //setting listener and referred a tutorial to do this reference [4]
         input_arrivalTime_admin_fuel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +77,6 @@ public class AdminUpdateFuel extends AppCompatActivity {
         RadioGroup radioGroup = findViewById(R.id.radioGroup_fuelType_adminFuel);
         RadioButton radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
         Toast.makeText(this, radioButton.getText() + " type is selected", Toast.LENGTH_SHORT).show();
-//        Session.FUEL_TYPE = radioButton.getText().toString();
+        Session.ADMIN_FUEL_TYPE = radioButton.getText().toString();
     }
 }

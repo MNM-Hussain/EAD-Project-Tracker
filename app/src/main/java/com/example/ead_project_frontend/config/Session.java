@@ -15,7 +15,8 @@ public class Session {
     public static String ADMIN_USER_EMAIL;
     public static String ADMIN_USER_PASSWORD;
     public static String ADMIN_USER_CONTACT;
+    public static String ADMIN_FUEL_TYPE;
 
-
+   //Dialog Box
     public static  Double FUEL_AMOUNT;
 }
