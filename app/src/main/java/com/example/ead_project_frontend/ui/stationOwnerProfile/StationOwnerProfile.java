@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.config.Session;
 import com.example.ead_project_frontend.ui.DbHandler.DBHandler;
+import com.example.ead_project_frontend.ui.stationOwnerDashboard.StationOwnerDashboard;
 import com.example.ead_project_frontend.ui.stationOwnerLogin.StationOwnerLogin;
 
 public class StationOwnerProfile extends AppCompatActivity {
@@ -79,7 +80,7 @@ public class StationOwnerProfile extends AppCompatActivity {
         back_arrow_AdminProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StationOwnerProfile.this, StationOwnerLogin.class);
+                Intent intent = new Intent(StationOwnerProfile.this, StationOwnerDashboard.class);
                 startActivity(intent);
             }
         });

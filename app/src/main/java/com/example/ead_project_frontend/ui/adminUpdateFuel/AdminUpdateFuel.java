@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.config.Session;
+import com.example.ead_project_frontend.ui.stationOwnerDashboard.StationOwnerDashboard;
 import com.example.ead_project_frontend.ui.stationOwnerRegistration.StationOwnerRegistration;
 
 import java.util.Locale;
@@ -57,7 +58,7 @@ public class AdminUpdateFuel extends AppCompatActivity {
         back_arrow_arrival.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminUpdateFuel.this, StationOwnerRegistration.class);
+                Intent intent = new Intent(AdminUpdateFuel.this, StationOwnerDashboard.class);
                 startActivity(intent);
             }
         });
