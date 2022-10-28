@@ -138,7 +138,7 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
 
                 //api call
                 ApiCall.decrementQueue(ID,Session.VECHILE_TYPE);
-                ApiCall.decrementfuel(ID,Session.FUEL_TYPE,20);
+                ApiCall.decrementfuel(ID,Session.FUEL_TYPE,Session.FUEL_AMOUNT);
 
                 //send to pumped status page from popup
                 Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);

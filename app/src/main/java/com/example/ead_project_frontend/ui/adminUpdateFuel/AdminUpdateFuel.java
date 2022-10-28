@@ -45,6 +45,8 @@ public class AdminUpdateFuel extends AppCompatActivity {
                         hour = selectedHour;
                         minute = selectedMinute;
                         input_arrivalTime_admin_fuel.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
+                        System.out.println("arival time "+input_arrivalTime_admin_fuel.getText().toString());
+
                     }
                 };
 
@@ -52,6 +54,9 @@ public class AdminUpdateFuel extends AppCompatActivity {
                 timePickerDialog.setTitle("Select Fuel Arrival Time");
                 timePickerDialog.show();
             }
+
+
+
         });
 
         //Setting up the arrow to move previous page
@@ -62,6 +67,8 @@ public class AdminUpdateFuel extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     // method to listen the radio button
