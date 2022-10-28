@@ -14,6 +14,7 @@ import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.ui.DbHandler.DBHandler;
 import com.example.ead_project_frontend.ui.adminUpdateFuel.AdminUpdateFuel;
 import com.example.ead_project_frontend.ui.login.Login;
+import com.example.ead_project_frontend.ui.stationOwnerProfile.StationOwnerProfile;
 import com.example.ead_project_frontend.ui.stationOwnerRegistration.StationOwnerRegistration;
 
 public class StationOwnerLogin extends AppCompatActivity {
@@ -74,7 +75,7 @@ public class StationOwnerLogin extends AppCompatActivity {
     }
 
     public void openStationOwnerHomePage() {
-        Intent intent = new Intent(this, AdminUpdateFuel.class);
+        Intent intent = new Intent(this, StationOwnerProfile.class);
         startActivity(intent);
     }
 }

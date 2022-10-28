@@ -226,6 +226,17 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
     }
 
+    //******************AdminProfile view Retreive *********************************
+
+    public Cursor getAdminRegistration() {
+        // it get the data repository in write mode
+//        SQLiteDatabase DB = this.getWritableDatabase();
+        SQLiteDatabase DB = this.getReadableDatabase();
+        //Cursor is like selecting the row
+        Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration", null);
+        return cursor;
+    }
+
 }
 
 
