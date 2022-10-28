@@ -16,9 +16,10 @@ import com.example.ead_project_frontend.config.Session;
 import com.example.ead_project_frontend.ui.DbHandler.DBHandler;
 import com.example.ead_project_frontend.ui.stationOwnerDashboard.StationOwnerDashboard;
 import com.example.ead_project_frontend.ui.stationOwnerLogin.StationOwnerLogin;
+import com.example.ead_project_frontend.ui.stationOwnerUpdateProfile.StationOwnerUpdateProfile;
 
 public class StationOwnerProfile extends AppCompatActivity {
-    private TextView getUsername_adminProfile, getUserEmail_adminProfile, getStationName_adminProfile,getStationBranch_adminProfile, getContactNumber;
+    private TextView getUsername_adminProfile, getUserEmail_adminProfile, getStationName_adminProfile, getStationBranch_adminProfile, getContactNumber;
     private TextView back_arrow_AdminProfile;
     private Button btn_editProfile_adminProfile, btn_deleteProfile_adminProfile;
     DBHandler DB;
@@ -65,7 +66,8 @@ public class StationOwnerProfile extends AppCompatActivity {
         btn_editProfile_adminProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(StationOwnerProfile.this, StationOwnerUpdateProfile.class);
+                startActivity(intent);
             }
         });
 
