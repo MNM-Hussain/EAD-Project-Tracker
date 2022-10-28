@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ead_project_frontend.R;
+import com.example.ead_project_frontend.api.ApiCall;
 import com.example.ead_project_frontend.config.Session;
+import com.example.ead_project_frontend.model.FuelStop;
 import com.example.ead_project_frontend.ui.DbHandler.DBHandler;
 import com.example.ead_project_frontend.ui.adminUpdateFuel.AdminUpdateFuel;
 import com.example.ead_project_frontend.ui.registration.Registration;
@@ -74,6 +76,8 @@ public class StationOwnerRegistration extends AppCompatActivity {
                     if (checkExistingStationOwner == false) {
                         Boolean InsertStationOwnerRegistrationData = DB.insertStationOwnerRegistration(Station_userName_Text, Station_Name, station_branch, Station_email_registration, Station_Password_registration, station_ContactNumber);
                         //api call
+                        FuelStop fuelStop = new FuelStop(Station_Name, station_branch,Station_Name, Station_email_registration);
+                        ApiCall.createFuelStop(fuelStop);
 
                         if (InsertStationOwnerRegistrationData == true) {
                             Toast.makeText(StationOwnerRegistration.this, "You have successfully Registered", Toast.LENGTH_SHORT).show();

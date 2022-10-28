@@ -17,6 +17,18 @@ public class FuelStop {
 
     public int threeWheelerQueue;
 
+    public String userEmail;
+
+    public String arrivalTime;
+
+
+    public FuelStop(String name, String location, String companyName, String userEmail) {
+        this.name = name;
+        this.location = location;
+        this.companyName = companyName;
+        this.userEmail = userEmail;
+    }
+
     public FuelStop(String id, String name, String location, String companyName, double fuelPetrolCapacity, double fuelDiselCapacity, int carQueue, int bikeQueue, int busQueue, int threeWheelerQueue) {
         this.id = id;
         this.name = name;
@@ -108,6 +120,22 @@ public class FuelStop {
 
     public void setThreeWheelerQueue(int threeWheelerQueue) {
         this.threeWheelerQueue = threeWheelerQueue;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 }
 

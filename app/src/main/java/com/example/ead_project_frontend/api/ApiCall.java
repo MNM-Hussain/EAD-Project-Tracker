@@ -137,7 +137,7 @@ public class ApiCall {
     }
 
     public static void decrementfuel(String id, String fuelType, double amount) {
-        {
+
             //handling API call
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(SysConfig.API_URL)
@@ -168,6 +168,63 @@ public class ApiCall {
             });
 
 
-        }
+
+    }
+
+    public static void incrementFuel(String email,String fuelType,Double amount ,String arrivalTime){
+        //handling API call
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SysConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
+        Call<FuelStop> call = jsonPlaceHolder.incrementFuelQuantity(email, fuelType, amount,arrivalTime);
+        call.enqueue(new Callback<FuelStop>() {
+            @Override
+            public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
+                if (!response.isSuccessful()) {
+                    System.out.println("NOT SUCUSSFUL");
+                    SysConfig.API_MESSAGE = "NOT SUCUSSFUL RESPONSE";
+                }
+                System.out.println(fuelType + "incremented");
+
+
+            }
+
+
+            @Override
+            public void onFailure(Call<FuelStop> call, Throwable t) {
+                System.out.println(t.getMessage());
+//
+            }
+        });
+    }
+
+
+    public static void createFuelStop(FuelStop fuelStop){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SysConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
+        Call<FuelStop> fuelStopCall  = jsonPlaceHolder.addNewStation(fuelStop);
+
+        fuelStopCall.enqueue(new Callback<FuelStop>() {
+            @Override
+            public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
+                if(!response.isSuccessful()){
+                    return;
+                }
+                System.out.println("New station Added");
+            }
+
+            @Override
+            public void onFailure(Call<FuelStop> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
     }
 }
