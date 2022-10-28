@@ -24,7 +24,7 @@ public interface JsonPlaceHolder {
     Call<FuelStop> patchqueue(@Path("id") String id, @Body String vechiletype);
 
     @PATCH("FuelStop/updateQueuedecrement/{id}")
-    Call<FuelStop> decrement(@Path("id") String id, @Body String vechiletype);
+    Call<FuelStop> decrementQueue(@Path("id") String id, @Body String vechiletype);
 
     @PATCH("FuelStop/decreasepetrolfuelquantity/{id}")
     Call<FuelStop> decrementFuel(@Path("id") String id, @Body String fueltype, @Query("fuelQuantity") double amount);

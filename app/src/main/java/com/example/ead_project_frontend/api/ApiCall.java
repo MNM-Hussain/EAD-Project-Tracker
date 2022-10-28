@@ -111,7 +111,7 @@ public class ApiCall {
 
 
             JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-            Call<FuelStop> call = jsonPlaceHolder.patchqueue(id, vechiletype.toLowerCase());
+            Call<FuelStop> call = jsonPlaceHolder.decrementQueue(id, vechiletype.toLowerCase());
             call.enqueue(new Callback<FuelStop>() {
                 @Override
                 public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {

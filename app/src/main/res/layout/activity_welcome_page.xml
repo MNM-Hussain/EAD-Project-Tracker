@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.welcomePage.WelcomePage"
+    >
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#750000">
+
+        <View
+            android:id="@+id/top_of_login_users"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#750000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/fuel_tracker_logo" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_login_station_owner"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/button_outlined"
+                android:text="Login as : Station Owner"
+                android:textColor="#750000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_login_normal_user"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/button_outlined"
+                android:text="Login as : Public User"
+                android:textColor="#750000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

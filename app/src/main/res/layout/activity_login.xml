@@ -184,7 +184,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:onClick="MoveToRegistrationActivity"
-            android:text="@string/noAccount"
+            android:text="New User? Create an Account"
             android:textColor="#750000"
             android:textSize="18sp"
             android:textStyle="bold"

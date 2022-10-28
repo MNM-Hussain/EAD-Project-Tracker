@@ -20,6 +20,7 @@ EditText editText;
         setContentView(R.layout.dialog_alert_pumped);
         editText= findViewById(R.id.input_numberOfLitres);
         System.out.println(editText.getText().toString());
+
         Session.FUEL_AMOUNT= new Double(editText.getText().toString());
         System.out.println(Session.FUEL_AMOUNT);
 

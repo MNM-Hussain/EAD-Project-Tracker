@@ -85,8 +85,8 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
         btn_Exit_Pumped.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(UpdatePumpedFuelStatus.this, Login.class);
-//                startActivity(intent);
+                Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);
+                startActivity(intent);
 
                 //stop the timer
                 if (running) {
@@ -137,8 +137,8 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
                 dialog.dismiss();
 
                 //api call
-                ApiCall.decrementQueue(ID,Session.VECHILE_TYPE);
-                ApiCall.decrementfuel(ID,Session.FUEL_TYPE,Session.FUEL_AMOUNT);
+                ApiCall.decrementQueue(ID, Session.VECHILE_TYPE);
+//                ApiCall.decrementfuel(ID,Session.FUEL_TYPE,Session.FUEL_AMOUNT);
 
                 //send to pumped status page from popup
                 Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);

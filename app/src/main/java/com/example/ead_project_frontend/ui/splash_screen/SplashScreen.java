@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.ui.login.Login;
+import com.example.ead_project_frontend.ui.welcomePage.WelcomePage;
 
 //reference [02]
 public class SplashScreen extends AppCompatActivity {
@@ -37,7 +38,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, Login.class);
+                Intent intent = new Intent(SplashScreen.this, WelcomePage.class);
                 startActivity(intent);
                 finish();
             }
