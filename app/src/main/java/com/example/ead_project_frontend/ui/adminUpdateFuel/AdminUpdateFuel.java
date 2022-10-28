@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -21,8 +22,10 @@ import com.example.ead_project_frontend.ui.stationOwnerRegistration.StationOwner
 import java.util.Locale;
 
 public class AdminUpdateFuel extends AppCompatActivity {
-    private EditText input_arrivalTime_admin_fuel ,input_fuel_amount;
+    private EditText input_arrivalTime_admin_fuel, input_numberOfLitres_admin;
+    private TextView getStationName_adminFuelUpdate, getStationBranch_adminFuelUpdate, getPetrolAvailability_adminFuel, getDieselAvailability_adminFuel;
     private TextView back_arrow_arrival;
+    private Button btn_admin_updateFuel;
 
     int hour, minute;
 
@@ -33,9 +36,19 @@ public class AdminUpdateFuel extends AppCompatActivity {
 
         //Initialize With ID
         input_arrivalTime_admin_fuel = findViewById(R.id.input_arrivalTime_admin_fuel);
+        input_numberOfLitres_admin = findViewById(R.id.input_numberOfLitres_admin);
+
         back_arrow_arrival = findViewById(R.id.back_arrow_arrival);
-        input_fuel_amount=findViewById(R.id.input_numberOfLitres_admin);
+        btn_admin_updateFuel = findViewById(R.id.btn_admin_updateFuel);
+
+        getStationName_adminFuelUpdate = findViewById(R.id.getStationName_adminFuelUpdate);
+        getStationBranch_adminFuelUpdate = findViewById(R.id.getStationBranch_adminFuelUpdate);
+        getPetrolAvailability_adminFuel = findViewById(R.id.getPetrolAvailability_adminFuel);
+        getDieselAvailability_adminFuel = findViewById(R.id.getDieselAvailability_adminFuel);
+
+
         //setting listener and referred a tutorial to do this reference [4]
+
         input_arrivalTime_admin_fuel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +59,7 @@ public class AdminUpdateFuel extends AppCompatActivity {
                         hour = selectedHour;
                         minute = selectedMinute;
                         input_arrivalTime_admin_fuel.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
-                        System.out.println("arival time "+input_arrivalTime_admin_fuel.getText().toString());
+                        System.out.println("arival time " + input_arrivalTime_admin_fuel.getText().toString());
 
                     }
                 };
@@ -55,9 +68,6 @@ public class AdminUpdateFuel extends AppCompatActivity {
                 timePickerDialog.setTitle("Select Fuel Arrival Time");
                 timePickerDialog.show();
             }
-
-
-
         });
 
         //Setting up the arrow to move previous page
@@ -69,7 +79,14 @@ public class AdminUpdateFuel extends AppCompatActivity {
             }
         });
 
-
+        //The Fuel updating Button
+        btn_admin_updateFuel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                startActivity(intent);
+            }
+        });
     }
 
     // method to listen the radio button
