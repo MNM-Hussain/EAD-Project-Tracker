@@ -146,7 +146,7 @@ public class ApiCall {
 
 
             JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-            Call<FuelStop> call = jsonPlaceHolder.decrementFuel(id, fuelType, amount);
+            Call<FuelStop> call = jsonPlaceHolder.decrementFuel(id, fuelType.toLowerCase(), amount);
             call.enqueue(new Callback<FuelStop>() {
                 @Override
                 public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
@@ -180,7 +180,7 @@ public class ApiCall {
 
 
         JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-        Call<FuelStop> call = jsonPlaceHolder.incrementFuelQuantity(email, fuelType, amount,arrivalTime);
+        Call<FuelStop> call = jsonPlaceHolder.incrementFuelQuantity(email, fuelType.toLowerCase(), amount,arrivalTime);
         call.enqueue(new Callback<FuelStop>() {
             @Override
             public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
@@ -188,7 +188,10 @@ public class ApiCall {
                     System.out.println("NOT SUCUSSFUL");
                     SysConfig.API_MESSAGE = "NOT SUCUSSFUL RESPONSE";
                 }
+
+                System.out.println(email + fuelType + amount + arrivalTime);
                 System.out.println(fuelType + "incremented");
+
 
 
             }

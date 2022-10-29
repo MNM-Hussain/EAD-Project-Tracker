@@ -151,10 +151,10 @@ public class AdminUpdateFuel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //api call
-                ApiCall.incrementFuel(Session.ADMIN_USER_EMAIL,Session.ADMIN_FUEL_TYPE,10.0,input_arrivalTime_admin_fuel.getText().toString());
+                ApiCall.incrementFuel(Session.ADMIN_USER_EMAIL,Session.ADMIN_FUEL_TYPE.toLowerCase(),new Double(String.valueOf(input_numberOfLitres_admin.getText())),input_arrivalTime_admin_fuel.getText().toString());
 
-//                Intent intent = new Intent();
-//                startActivity(intent);
+               Intent intent = new Intent(AdminUpdateFuel.this, StationOwnerDashboard.class);
+               startActivity(intent);
 
             }
         });

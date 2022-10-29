@@ -36,5 +36,5 @@ public interface JsonPlaceHolder {
     Call<FuelStop> decrementFuel(@Path("id") String id, @Body String fueltype, @Query("fuelQuantity") double amount);
 
     @PATCH("FuelStop/increasepetrolfuelquantity/{email}")
-    Call<FuelStop> incrementFuelQuantity(@Path("email") String email, @Body String fueltype,@Query("fuelQuantity") double amount, @Query("arrivalTime") String arrivalTime);
+    Call<FuelStop> incrementFuelQuantity(@Path("email") String email,@Body String fueltype, @Query("fuelQuantity") double amount, @Query("arrivalTime") String arrivalTime );
 }
