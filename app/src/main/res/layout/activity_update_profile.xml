@@ -63,7 +63,8 @@
         android:drawablePadding="16dp"
         android:ems="10"
         android:hint="@string/userNIC"
-        android:inputType="text"
+        android:inputType="none"
+        android:focusable="false"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +82,8 @@
         android:drawablePadding="16dp"
         android:ems="10"
         android:hint="@string/userEmail"
-        android:inputType="textEmailAddress"
+        android:inputType="none"
+        android:focusable="false"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,49 +125,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Update_Password_registration" />
 
-    <TextView
-        android:id="@+id/update_fuelTypeLabel"
+    <EditText
+        android:id="@+id/Update_FuelType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/userFuelType"
-        android:textColor="#750000"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:background="@drawable/round_border"
+        android:drawableStart="@drawable/ic_fuel_type"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Fuel Type"
+        android:inputType="text"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Update_vehicleType" />
 
-    <RadioGroup
-        android:id="@+id/Update_radioGroup_fuelType"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update_fuelTypeLabel">
+<!--    <TextView-->
+<!--        android:id="@+id/update_fuelTypeLabel"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:text="@string/userFuelType"-->
+<!--        android:textColor="#750000"-->
+<!--        android:textSize="22sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/Update_vehicleType" />-->
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/customizable_radio_button"
-            android:text="Petrol"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"></RadioButton>
+<!--    <RadioGroup-->
+<!--        android:id="@+id/Update_radioGroup_fuelType"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/update_fuelTypeLabel">-->
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:button="@drawable/customizable_radio_button"
-            android:text="Diesel"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"></RadioButton>
-    </RadioGroup>
+<!--        <RadioButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:button="@drawable/customizable_radio_button"-->
+<!--            android:text="Petrol"-->
+<!--            android:textColor="@color/colorPrimaryDark"-->
+<!--            android:textSize="20sp"></RadioButton>-->
+
+<!--        <RadioButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:button="@drawable/customizable_radio_button"-->
+<!--            android:text="Diesel"-->
+<!--            android:textColor="@color/colorPrimaryDark"-->
+<!--            android:textSize="20sp"></RadioButton>-->
+<!--    </RadioGroup>-->
 
     <Button
         android:id="@+id/Update_Cancel_button"
@@ -182,7 +202,7 @@
 
         app:layout_constraintEnd_toStartOf="@+id/Update_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Update_radioGroup_fuelType" />
+        app:layout_constraintTop_toBottomOf="@+id/Update_FuelType" />
 
     <Button
         android:id="@+id/Update_button"
@@ -198,6 +218,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/Update_Cancel_button"
-        app:layout_constraintTop_toBottomOf="@+id/Update_radioGroup_fuelType" />
+        app:layout_constraintTop_toBottomOf="@+id/Update_FuelType" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

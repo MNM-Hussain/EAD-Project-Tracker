@@ -46,7 +46,7 @@
             <Button
                 android:id="@+id/btn_login_station_owner"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="75dp"
                 android:background="@drawable/button_outlined"
                 android:text="Login as : Station Owner"
                 android:textColor="#750000"
@@ -63,7 +63,7 @@
             <Button
                 android:id="@+id/btn_login_normal_user"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="75dp"
                 android:background="@drawable/button_outlined"
                 android:text="Login as : Public User"
                 android:textColor="#750000"

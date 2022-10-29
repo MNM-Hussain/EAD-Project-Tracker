@@ -75,7 +75,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="65dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round_border"
             android:drawableStart="@drawable/ic_email_icon"
@@ -122,20 +122,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input_Password" />
 
-        <TextView
-            android:id="@+id/forgot_Password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/forgotPassword"
-            android:textColor="#750000"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_Login" />
+<!--        <TextView-->
+<!--            android:id="@+id/forgot_Password"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:text="@string/forgotPassword"-->
+<!--            android:textColor="#750000"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/btn_Login" />-->
 
 
         <TextView
@@ -146,35 +146,35 @@
             android:text="@string/orSeparate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/forgot_Password" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_Login" />
 
-        <LinearLayout
-            android:id="@+id/linear_Layout"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Or_Separate">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/linear_Layout"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/Or_Separate">-->
 
-            <ImageView
-                android:id="@+id/google_Login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/googleIcon"
-                app:srcCompat="@drawable/google" />
+<!--            <ImageView-->
+<!--                android:id="@+id/google_Login"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:contentDescription="@string/googleIcon"-->
+<!--                app:srcCompat="@drawable/google" />-->
 
-            <ImageView
-                android:id="@+id/facebook_Login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/fbIcon"
-                app:srcCompat="@drawable/facebook" />
-        </LinearLayout>
+<!--            <ImageView-->
+<!--                android:id="@+id/facebook_Login"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:contentDescription="@string/fbIcon"-->
+<!--                app:srcCompat="@drawable/facebook" />-->
+<!--        </LinearLayout>-->
 
         <TextView
             android:id="@+id/RegisterNow"
@@ -190,7 +190,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_Layout" />
+            app:layout_constraintTop_toBottomOf="@+id/Or_Separate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
