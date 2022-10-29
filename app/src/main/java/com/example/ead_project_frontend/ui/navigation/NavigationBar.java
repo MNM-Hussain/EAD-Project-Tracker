@@ -47,7 +47,7 @@ public class NavigationBar extends AppCompatActivity {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
                 //navigation
-                Toast.makeText(getApplicationContext(), "clicked item" + item.getId(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "clicked " + item.getId(), Toast.LENGTH_SHORT).show();
 
             }
         });

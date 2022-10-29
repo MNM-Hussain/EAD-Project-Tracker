@@ -35,7 +35,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //********************************************User-Registration**********************************************************************************
-    //----------Insert----------------------------------------
+    //----------Insert user----------------------------------------
     public Boolean insertUserRegistration(String userName, String nic, String email, String password, String vehicleType, String fuelType) {
         // it get the data repository in write mode
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -59,7 +59,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    //-------Update-----------------
+    //-------Update User-----------------
     @SuppressLint("Range")
     public Boolean updateUserRegistration(String userName, String nic, String email, String password, String vehicleType, String fuelType) {
         // it get the data repository in write mode
@@ -90,17 +90,17 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    //-------Delete-----------------
+    //-------Delete user-----------------
     public Boolean deleteUserRegistration(String nic) {
         // it get the data repository in write mode
         SQLiteDatabase DB = this.getWritableDatabase();
 
         //Cursor is like selecting the row
-        Cursor cursor = DB.rawQuery("Select * from Registration where nic = ?", new String[]{nic});
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration where nic = ?", new String[]{nic});
 
         if (cursor.getCount() > 0) {
             // Delete the table using NIC
-            long result = DB.delete("Registration", "nic = ?", new String[]{nic});
+            long result = DB.delete("UserRegistration", "nic = ?", new String[]{nic});
             if (result == -1) {
                 return false;
             } else {
@@ -110,16 +110,6 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
         }
     }
-
-    //-------Retrieve-----------------
-//    public Cursor getUserRegistration() {
-//        // it get the data repository in write mode
-//        SQLiteDatabase DB = this.getWritableDatabase();
-//
-//        //Cursor is like selecting the row
-//        Cursor cursor  = DB.rawQuery("Select * from Registration", null);
-//        return cursor;
-//    }
 
     //**********************************************Login*****************************************************************
     public Boolean checkUsername(String userName) {
@@ -131,6 +121,7 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
     }
 
+    //checks whether there are existing users when registering
     public Boolean checkExistingUser(String nic, String email) {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery("Select * from UserRegistration where nic = ? and email = ?", new String[]{nic, email});
@@ -140,6 +131,7 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
     }
 
+    //checks when login to the system
     @SuppressLint("Range")
     public Boolean checkUserCredentials(String email, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -170,6 +162,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //****************************Station Owner********************************************************************
 
     //***************************Station Owner Registration***********************************************************************
 
@@ -215,6 +208,27 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor.getCount() > 0) {
             // updating the table using NIC
             long result = DB.update("StationOwnerRegistration", contentValues, "stationOwnerEmail = ?", new String[]{stationOwnerEmail});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    //-------Delete StationOwner-----------------
+    public Boolean deleteAdminRegistration(String stationOwnerEmail) {
+        // it get the data repository in write mode
+        SQLiteDatabase DB = this.getWritableDatabase();
+
+        //Cursor is like selecting the row
+        Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration where stationOwnerEmail = ?", new String[]{stationOwnerEmail});
+
+        if (cursor.getCount() > 0) {
+            // Delete the table using NIC
+            long result = DB.delete("StationOwnerRegistration", "stationOwnerEmail = ?", new String[]{stationOwnerEmail});
             if (result == -1) {
                 return false;
             } else {
