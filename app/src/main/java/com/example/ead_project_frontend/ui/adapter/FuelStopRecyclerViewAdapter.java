@@ -1,6 +1,7 @@
 package com.example.ead_project_frontend.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.animation.content.Content;
 import com.example.ead_project_frontend.R;
 import com.example.ead_project_frontend.model.FuelStop;
 import com.example.ead_project_frontend.ui.recyclerviewItemClick.RecyclerViewInterface;
+import com.example.ead_project_frontend.ui.updateArrivalStation.UpdateArrivalStation;
 
 import java.util.List;
 
@@ -59,6 +62,17 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
         holder.locationOfFuelStation.setText(fuelStops.get(position).getLocation());
         holder.numberofQueue.setText(totalcount);
 
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, UpdateArrivalStation.class);
+                intent.putExtra("ID",fuelStops.get(position).getId());
+
+                context.startActivity(intent);
+            }
+        });
+
         if (fuelProvider.equals("ceypetco")) {
             holder.fuelstationlogo.setImageResource(R.drawable.ceypetco);
         } else if (fuelProvider.equals("ioc")) {
@@ -84,6 +98,7 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
         TextView nameOfFuelstation;
         TextView locationOfFuelStation;
         TextView numberofQueue;
+        CardView cardView;
 
 
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
@@ -93,6 +108,10 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
             nameOfFuelstation = itemView.findViewById(R.id.fuelStationName);
             locationOfFuelStation = itemView.findViewById(R.id.fuelStationLocation);
             numberofQueue = itemView.findViewById(R.id.totalNumber);
+            cardView=itemView.findViewById(R.id.card);
+
+
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
