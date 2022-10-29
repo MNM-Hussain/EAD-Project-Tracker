@@ -41,6 +41,7 @@ public class FragmentHome extends Fragment implements RecyclerViewInterface {
     List<FuelStop> fuelStops;
     SearchView searchView;
     RecyclerViewInterface recyclerViewInterface;
+    FuelStopRecyclerViewAdapter fuelStopRecyclerViewAdapter;
 
     @Nullable
     @Override
@@ -58,18 +59,7 @@ public class FragmentHome extends Fragment implements RecyclerViewInterface {
         recyclerView = view.findViewById(R.id.fuelStopRecyclerView);
         searchView = view.findViewById(R.id.search_bar);
         searchView.clearFocus();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterFuelStation(newText);
-                return true;
-            }
-        });
 
 
         //handling API call
@@ -105,13 +95,26 @@ public class FragmentHome extends Fragment implements RecyclerViewInterface {
 
 
                 if (fuelStops != null && fuelStops.size() > 0) {
-                    FuelStopRecyclerViewAdapter fuelStopRecyclerViewAdapter = new FuelStopRecyclerViewAdapter(recyclerViewInterface, getActivity(), fuelStops);
+                    fuelStopRecyclerViewAdapter = new FuelStopRecyclerViewAdapter(recyclerViewInterface, getActivity(), fuelStops);
                     recyclerView.setAdapter(fuelStopRecyclerViewAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
                 } else {
                     System.out.println("cant load fuel stops");
                 }
+
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        filterFuelStation(newText);
+                        return true;
+                    }
+                });
 
             }
 
@@ -138,6 +141,8 @@ public class FragmentHome extends Fragment implements RecyclerViewInterface {
 
         if (fuelStopslist.isEmpty()) {
             Toast.makeText(getActivity(), "No item found", Toast.LENGTH_SHORT).show();
+        }else{
+            fuelStopRecyclerViewAdapter.setFilteredList(fuelStopslist);
         }
 
     }

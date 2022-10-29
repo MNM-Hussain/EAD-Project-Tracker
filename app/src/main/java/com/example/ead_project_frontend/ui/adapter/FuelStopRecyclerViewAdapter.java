@@ -28,6 +28,11 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
         this.fuelStops = fuelStops;
     }
 
+    public void setFilteredList(List<FuelStop> filteredList){
+        this.fuelStops =filteredList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public FuelStopRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
