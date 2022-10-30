@@ -59,9 +59,9 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
         holder.locationOfFuelStation.setText(fuelStops.get(position).getLocation());
         holder.numberofQueue.setText(totalcount);
 
-        if (fuelProvider.equals("ceypetco")) {
+        if (fuelProvider.equalsIgnoreCase("ceypetco")) {
             holder.fuelstationlogo.setImageResource(R.drawable.ceypetco);
-        } else if (fuelProvider.equals("ioc")) {
+        } else if (fuelProvider.equalsIgnoreCase("ioc")) {
             holder.fuelstationlogo.setImageResource(R.drawable.ioc);
         } else {
             holder.fuelstationlogo.setImageResource(R.drawable.laughs);

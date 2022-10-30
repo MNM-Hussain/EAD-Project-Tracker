@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +65,56 @@ public class StationOwnerRegistration extends AppCompatActivity {
                 String Station_email_registration = input_Station_email_registration.getText().toString();
                 String Station_Password_registration = input_Station_Password_registration.getText().toString();
                 String station_ContactNumber = input_station_ContactNumber.getText().toString();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                String phoneNumberPattern  = "[0-9]{10}";
+
+                // ************validations*******************
+                //Validation for Name
+                if (TextUtils.isEmpty(Station_userName_Text)) {
+                    input_Station_userName.setError("Please Enter Your Full Name");
+                    return;
+                }
+
+                //Validation for StationName
+                if (TextUtils.isEmpty(Station_Name)) {
+                    input_Station_Name.setError("Please Enter the Station Name");
+                    return;
+                }
+
+                //Validation for StationBranch
+                if (TextUtils.isEmpty(station_branch)) {
+                    input_station_branch.setError("Please Enter the Station Branch");
+                    return;
+                }
+
+                //validation for email
+                if (TextUtils.isEmpty(Station_email_registration )) {
+                    input_Station_email_registration.setError("please enter a Email!!!");
+                    return;
+                } else if (Station_email_registration.matches(emailPattern)) {
+                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+                } else {
+                    input_Station_email_registration.setError("please enter Valid Email address!!!");
+                }
+
+                //validation for password
+                if (TextUtils.isEmpty(Station_Password_registration)) {
+                    input_Station_Password_registration.setError("please enter Password!!!");
+                    return;
+                }
+                else if (Station_Password_registration.length() < 8) {
+                    input_Station_Password_registration.setError("please enter Strong Password!!!");
+                }
+
+                //validation for contactNumber
+                if (TextUtils.isEmpty(station_ContactNumber )) {
+                    input_station_ContactNumber.setError("please enter Phone Number!!!");
+                    return;
+                } else if (station_ContactNumber.matches(phoneNumberPattern)) {
+                    Toast.makeText(getApplicationContext(), "Phone number is Valid", Toast.LENGTH_SHORT).show();
+                } else {
+                    input_station_ContactNumber.setError("Enter a valid Phone number!!!");
+                }
 
                 // Check the existing user by nic and email
                 Boolean checkExistingStationOwner = DB.checkExistingStationOwner(Station_email_registration);

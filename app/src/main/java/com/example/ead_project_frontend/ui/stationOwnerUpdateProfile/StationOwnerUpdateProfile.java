@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +75,57 @@ public class StationOwnerUpdateProfile extends AppCompatActivity {
                 String Update_stationName = updateStationName.getText().toString();
                 String Update_stationBranch = updateStationBranch.getText().toString();
                 String Update_stationOwnerEmail = updateStationOwnerEmail.getText().toString();
+
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                String phoneNumberPattern  = "[0-9]{10}";
+
+                // ************validations*******************
+                //Validation for Name
+                if (TextUtils.isEmpty(Update_adminName)) {
+                    updateAdminName.setError("Please Enter Your Full Name");
+                    return;
+                }
+
+                //Validation for StationName
+                if (TextUtils.isEmpty(Update_stationName)) {
+                    updateStationName.setError("Please Enter the Station Name");
+                    return;
+                }
+
+                //Validation for StationBranch
+                if (TextUtils.isEmpty(Update_stationBranch)) {
+                    updateStationBranch.setError("Please Enter the Station Branch");
+                    return;
+                }
+
+                //validation for email
+                if (TextUtils.isEmpty(Update_stationOwnerEmail)) {
+                    updateStationOwnerEmail.setError("please enter a Email!!!");
+                    return;
+                } else if (Update_stationOwnerEmail.matches(emailPattern)) {
+                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+                } else {
+                    updateStationOwnerEmail.setError("please enter Valid Email address!!!");
+                }
+
+                //validation for password
+                if (TextUtils.isEmpty(Update_adminPassword)) {
+                    updateAdminPassword.setError("please enter Password!!!");
+                    return;
+                }
+                else if (Update_adminPassword.length() < 8) {
+                    updateAdminPassword.setError("please enter Strong Password!!!");
+                }
+
+                //validation for contactNumber
+                if (TextUtils.isEmpty(Update_adminContactNumber)) {
+                    updateAdminContactNumber.setError("please enter Phone Number!!!");
+                    return;
+                } else if (Update_adminContactNumber.matches(phoneNumberPattern)) {
+                    Toast.makeText(getApplicationContext(), "Phone number is Valid", Toast.LENGTH_SHORT).show();
+                } else {
+                    updateAdminContactNumber.setError("Enter a valid Phone number!!!");
+                }
 
                 Boolean checkAdminUpdate = DB.updateAdminRegistration(Update_adminName, Update_stationName, Update_stationBranch, Update_stationOwnerEmail, Update_adminPassword, Update_adminContactNumber);
                 if (checkAdminUpdate = true) {

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -75,6 +76,57 @@ public class UpdateProfile extends AppCompatActivity {
                 String updatePassword = Update_Password_registration.getText().toString();
                 String updateVehicleType = Update_vehicleType.getText().toString();
                 String updateFuelType = Update_FuelType.getText().toString();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                String nicPattern = "[0-9]{12}";
+
+                // ************validations*******************
+                //validation for email
+                if (TextUtils.isEmpty(updateEmail)) {
+                    Update_email_registration.setError("please enter Email!!!");
+                    return;
+                } else if (updateEmail.matches(emailPattern)) {
+                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+                } else {
+                    Update_email_registration.setError("please enter Valid Email address!!!");
+                }
+
+                //Validation for Name
+                if (TextUtils.isEmpty(updateName)) {
+                    update_userName.setError("Please Enter Your Full Name");
+                    return;
+                }
+
+                //validation for NIC
+                if (TextUtils.isEmpty(updateNIC)) {
+                    Update_NIC.setError("Please enter your NIC");
+                    return;
+                } else if (updateNIC.matches(nicPattern)) {
+                    Toast.makeText(getApplicationContext(), "valid NIC", Toast.LENGTH_SHORT).show();
+                } else {
+                    Update_NIC.setError("please enter Valid NIC!!!");
+                }
+
+                //validation for password
+                if (TextUtils.isEmpty(updatePassword)) {
+                    Update_Password_registration.setError("please enter Password!!!");
+                    return;
+                }
+                else if (updatePassword.length() < 8) {
+                    Update_Password_registration.setError("please enter Strong Password!!!");
+                }
+
+                //validation for VehicleTYPE
+                if (TextUtils.isEmpty(updateVehicleType)) {
+                    Update_vehicleType.setError("Please Enter Your vehicle Type");
+                    return;
+                }
+
+                //validation for fuelTYpe
+                if (TextUtils.isEmpty(updateFuelType)) {
+                    Update_FuelType.setError("Please Enter Your vehicle Type");
+                    return;
+                }
+
 
                 Boolean checkUpdate = DB.updateUserRegistration(updateName, updateNIC, updateEmail, updatePassword, updateVehicleType, updateFuelType);
                 if (checkUpdate = true) {

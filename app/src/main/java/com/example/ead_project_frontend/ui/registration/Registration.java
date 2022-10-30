@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +60,52 @@ public class Registration extends AppCompatActivity {
                 String emailText = email.getText().toString();
                 String passwordText = password.getText().toString();
                 String vehicleTypeText = vehicleType.getText().toString();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                String nicPattern = "[0-9]{12}";
+                String vehicleTypePattern = "[Car] || [car] || [Bike] || [bike] || ";
+//                Pattern p = Pattern.compile("(0|91)?[6-9][0-9]{9}");
+
+                // ************validations*******************
+                //Validation for Name
+                if (TextUtils.isEmpty(nameText)) {
+                    userName.setError("Please Enter Your Full Name");
+                    return;
+                }
+
+                //validation for NIC
+                if (TextUtils.isEmpty(nicText)) {
+                    nic.setError("Please enter your NIC");
+                    return;
+                } else if (nicText.matches(nicPattern)) {
+                    Toast.makeText(getApplicationContext(), "valid NIC", Toast.LENGTH_SHORT).show();
+                } else {
+                    nic.setError("please enter Valid NIC!!!");
+                }
+
+                //validation for email
+                if (TextUtils.isEmpty(emailText)) {
+                    email.setError("please enter Email!!!");
+                    return;
+                } else if (emailText.matches(emailPattern)) {
+                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+                } else {
+                    email.setError("please enter Valid Email address!!!");
+                }
+
+                //validation for password
+                if (TextUtils.isEmpty(passwordText)) {
+                    password.setError("please enter Password!!!");
+                    return;
+                }
+                else if (passwordText.length() < 8) {
+                    password.setError("please enter Strong Password!!!");
+                }
+
+                //validation for VehicleTYPE
+                if (TextUtils.isEmpty(vehicleTypeText)) {
+                    vehicleType.setError("Please Enter Your vehicle Type");
+                    return;
+                }
 
                 // Check the existing user by nic and email
                 Boolean checkExistingUser = DB.checkExistingUser(nicText, emailText);
@@ -77,7 +124,7 @@ public class Registration extends AppCompatActivity {
                             Toast.makeText(Registration.this, "Error!! Registration unsuccessful", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(Registration.this, "Error!! Already an user exist, please sign-in", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registration.this, "Error!! Already an user exist with same ID, please sign-in with unique ID", Toast.LENGTH_SHORT).show();
                     }
             }
         });
