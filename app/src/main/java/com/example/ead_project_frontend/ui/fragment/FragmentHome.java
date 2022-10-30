@@ -99,22 +99,24 @@ public class FragmentHome extends Fragment implements RecyclerViewInterface {
                     recyclerView.setAdapter(fuelStopRecyclerViewAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                        @Override
+                        public boolean onQueryTextSubmit(String query) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onQueryTextChange(String newText) {
+                            filterFuelStation(newText);
+                            return true;
+                        }
+                    });
+
                 } else {
                     System.out.println("cant load fuel stops");
                 }
 
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        return false;
-                    }
 
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        filterFuelStation(newText);
-                        return true;
-                    }
-                });
 
             }
 
