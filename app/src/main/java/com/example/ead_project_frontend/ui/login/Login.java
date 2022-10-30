@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +40,30 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String email_Text = userEmail.getText().toString();
                 String password_Text = password.getText().toString();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+//                String password_Pattern = "^(?=.*[0-9])(?=.*[A-Z])";
+
+                //****validations for email and password********
+                //validation for email
+                if (TextUtils.isEmpty(email_Text)) {
+                    userEmail.setError("please enter Email!!!");
+                    return;
+                } else if (email_Text.matches(emailPattern)) {
+                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+                } else {
+                    userEmail.setError("please enter Valid Email address!!!");
+                }
+
+                //validation for password
+                if (TextUtils.isEmpty(password_Text)) {
+                    password.setError("please enter Password!!!");
+                    return;
+                }
+//                else if (password_Text.matches(password_Pattern)) {
+//                    Toast.makeText(getApplicationContext(), "valid Password", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    password.setError("please enter Strong Password!!!");
+//                }
 
                 // validation that to make sure all the fields are filled without any empty fields
                 if (email_Text.equals("") || password_Text.equals(""))

@@ -35,7 +35,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //********************************************User-Registration**********************************************************************************
-    //----------Insert----------------------------------------
+    //----------Insert user----------------------------------------
     public Boolean insertUserRegistration(String userName, String nic, String email, String password, String vehicleType, String fuelType) {
         // it get the data repository in write mode
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -59,7 +59,8 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    //-------Update-----------------
+    //-------Update User-----------------
+    @SuppressLint("Range")
     public Boolean updateUserRegistration(String userName, String nic, String email, String password, String vehicleType, String fuelType) {
         // it get the data repository in write mode
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -68,18 +69,17 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("userName", userName);
 //        contentValues.put("nic", nic);
-        contentValues.put("email", email);
+//        contentValues.put("email", email);
         contentValues.put("password", password);
         contentValues.put("vehicleType", vehicleType);
         contentValues.put("fuelType", fuelType);
 
         //Cursor is like selecting the row
-        Cursor cursor = DB.rawQuery("Select * from Registration where nic = ?", new String[]{nic});
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration where nic = ?", new String[]{nic});
 
         if (cursor.getCount() > 0) {
-
             // updating the table using NIC
-            long result = DB.update("Registration", contentValues, "nic = ?", new String[]{nic});
+            long result = DB.update("UserRegistration", contentValues, "nic = ?", new String[]{nic});
             if (result == -1) {
                 return false;
             } else {
@@ -90,17 +90,17 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    //-------Delete-----------------
+    //-------Delete user-----------------
     public Boolean deleteUserRegistration(String nic) {
         // it get the data repository in write mode
         SQLiteDatabase DB = this.getWritableDatabase();
 
         //Cursor is like selecting the row
-        Cursor cursor = DB.rawQuery("Select * from Registration where nic = ?", new String[]{nic});
+        Cursor cursor = DB.rawQuery("Select * from UserRegistration where nic = ?", new String[]{nic});
 
         if (cursor.getCount() > 0) {
             // Delete the table using NIC
-            long result = DB.delete("Registration", "nic = ?", new String[]{nic});
+            long result = DB.delete("UserRegistration", "nic = ?", new String[]{nic});
             if (result == -1) {
                 return false;
             } else {
@@ -110,16 +110,6 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
         }
     }
-
-    //-------Retrieve-----------------
-//    public Cursor getUserRegistration() {
-//        // it get the data repository in write mode
-//        SQLiteDatabase DB = this.getWritableDatabase();
-//
-//        //Cursor is like selecting the row
-//        Cursor cursor  = DB.rawQuery("Select * from Registration", null);
-//        return cursor;
-//    }
 
     //**********************************************Login*****************************************************************
     public Boolean checkUsername(String userName) {
@@ -131,6 +121,7 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
     }
 
+    //checks whether there are existing users when registering
     public Boolean checkExistingUser(String nic, String email) {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery("Select * from UserRegistration where nic = ? and email = ?", new String[]{nic, email});
@@ -140,6 +131,7 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
     }
 
+    //checks when login to the system
     @SuppressLint("Range")
     public Boolean checkUserCredentials(String email, String password) {
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -149,6 +141,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 Session.USER_NAME = cursor.getString(cursor.getColumnIndex("userName"));
                 Session.NIC = cursor.getString(cursor.getColumnIndex("nic"));
                 Session.USER_EMAIL = cursor.getString(cursor.getColumnIndex("email"));
+                Session.USER_PASSWORD = cursor.getString(cursor.getColumnIndex("password"));
                 Session.VECHILE_TYPE = cursor.getString(cursor.getColumnIndex("vehicleType"));
                 Session.FUEL_TYPE = cursor.getString(cursor.getColumnIndex("fuelType"));
                 System.out.println(Session.VECHILE_TYPE);
@@ -158,7 +151,7 @@ public class DBHandler extends SQLiteOpenHelper {
             return false;
     }
 
-    //******************Profile view Retreive *********************************
+    //******************User Profile view Retreive *********************************
 
     public Cursor getUserRegistration() {
         // it get the data repository in write mode
@@ -169,6 +162,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //****************************Station Owner********************************************************************
 
     //***************************Station Owner Registration***********************************************************************
 
@@ -181,7 +175,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("stationOwnerName", stationOwnerName);
         contentValues.put("stationName", stationName);
         contentValues.put("stationBranch", stationBranch);
-        contentValues.put("stationOwnerEmail",stationOwnerEmail);
+        contentValues.put("stationOwnerEmail", stationOwnerEmail);
         contentValues.put("stationOwnerPassword", stationOwnerPassword);
         contentValues.put("stationOwnerContactNumber", stationOwnerContactNumber);
 
@@ -194,11 +188,62 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
+    //************************update profile of station Owner******************************
+    //-------Update-----------------
+    @SuppressLint("Range")
+    public Boolean updateAdminRegistration(String stationOwnerName, String stationName, String stationBranch, String stationOwnerEmail, String stationOwnerPassword, String stationOwnerContactNumber) {
+        // it get the data repository in write mode
+        SQLiteDatabase DB = this.getWritableDatabase();
+
+        //create a new map of values,where column names the keys
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("stationOwnerName", stationOwnerName);
+        contentValues.put("stationOwnerPassword", stationOwnerPassword);
+        contentValues.put("stationOwnerContactNumber", stationOwnerContactNumber);
+
+        //Cursor is like selecting the row
+        Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration where stationOwnerEmail = ?", new String[]{stationOwnerEmail});
+
+        if (cursor.getCount() > 0) {
+            // updating the table using NIC
+            long result = DB.update("StationOwnerRegistration", contentValues, "stationOwnerEmail = ?", new String[]{stationOwnerEmail});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    //-------Delete StationOwner-----------------
+    public Boolean deleteAdminRegistration(String stationOwnerEmail) {
+        // it get the data repository in write mode
+        SQLiteDatabase DB = this.getWritableDatabase();
+
+        //Cursor is like selecting the row
+        Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration where stationOwnerEmail = ?", new String[]{stationOwnerEmail});
+
+        if (cursor.getCount() > 0) {
+            // Delete the table using NIC
+            long result = DB.delete("StationOwnerRegistration", "stationOwnerEmail = ?", new String[]{stationOwnerEmail});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
     //======check is there existing StationOwner with same emailID
 
     public Boolean checkExistingStationOwner(String stationOwnerEmail) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration where stationOwnerEmail = ?", new String[]{ stationOwnerEmail });
+        Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration where stationOwnerEmail = ?", new String[]{stationOwnerEmail});
         if (cursor.getCount() > 0)
             return true;
         else
@@ -210,7 +255,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @SuppressLint("Range")
     public Boolean checkStationOwnerCredentials(String stationOwnerEmail, String stationOwnerPassword) {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration where stationOwnerEmail = ? and stationOwnerPassword= ?", new String[]{ stationOwnerEmail, stationOwnerPassword });
+        Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration where stationOwnerEmail = ? and stationOwnerPassword= ?", new String[]{stationOwnerEmail, stationOwnerPassword});
         if (cursor.getCount() > 0) {
             if (cursor.moveToFirst()) {
                 Session.ADMIN_USER_NAME = cursor.getString(cursor.getColumnIndex("stationOwnerName"));
@@ -236,7 +281,6 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = DB.rawQuery("Select * from StationOwnerRegistration", null);
         return cursor;
     }
-
 }
 
 

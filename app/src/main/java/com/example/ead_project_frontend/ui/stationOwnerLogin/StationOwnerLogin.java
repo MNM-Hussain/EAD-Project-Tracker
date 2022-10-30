@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,24 @@ public class StationOwnerLogin extends AppCompatActivity {
             public void onClick(View view) {
                 String AdminLoginEmail_text = input_Email_AdminLogin.getText().toString();
                 String AdminLoginPassword = input_Password_AdminLogin.getText().toString();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+                //****validations for email and password********
+                //validation for email
+                if (TextUtils.isEmpty(AdminLoginEmail_text)) {
+                    input_Email_AdminLogin.setError("please enter a Email!!!");
+                    return;
+                } else if (AdminLoginEmail_text.matches(emailPattern)) {
+                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+                } else {
+                    input_Email_AdminLogin.setError("please enter Valid Email address!!!");
+                }
+
+                //validation for password
+                if (TextUtils.isEmpty(AdminLoginPassword)) {
+                    input_Password_AdminLogin.setError("please enter Password!!!");
+                    return;
+                }
 
                 // validation that to make sure all the fields are filled without any empty fields
                 if (AdminLoginEmail_text.equals("") || AdminLoginPassword.equals(""))

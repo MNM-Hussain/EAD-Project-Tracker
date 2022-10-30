@@ -2,6 +2,7 @@ package com.example.ead_project_frontend.ui.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.ead_project_frontend.R;
@@ -22,12 +24,14 @@ import com.example.ead_project_frontend.config.Session;
 import com.example.ead_project_frontend.config.SysConfig;
 import com.example.ead_project_frontend.ui.DbHandler.DBHandler;
 import com.example.ead_project_frontend.ui.login.Login;
+import com.example.ead_project_frontend.ui.stationOwnerLogin.StationOwnerLogin;
+import com.example.ead_project_frontend.ui.stationOwnerProfile.StationOwnerProfile;
 import com.example.ead_project_frontend.ui.updateProfile.UpdateProfile;
 
 public class FragmentProfile extends Fragment {
     private TextView getUsername, getUserEmail, getNIC, getVehicleType, getFuelType;
     private Button btn_editProfile, btn_deleteProfile;
-
+    AlertDialog.Builder builder;
     DBHandler DB;
 
     @Nullable
@@ -49,6 +53,9 @@ public class FragmentProfile extends Fragment {
 
         //Initializing DB
         DB = new DBHandler(getActivity());
+
+        //initializing alertBox
+        builder = new AlertDialog.Builder(getActivity());
 
         //Initializing Button
         btn_editProfile = (Button) view.findViewById(R.id.btn_editProfile);
@@ -88,7 +95,35 @@ public class FragmentProfile extends Fragment {
         btn_deleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                builder.setTitle("Confirmation Alert")
+                        .setMessage("Can you confirm that you wants to delete your Profile?")
+                        .setCancelable(true)
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                finish();
+                                //Implementation to delete the Admin-User
+                                String userNICText = getNIC.getText().toString();
 
+                                Boolean checkDeleteUser = DB.deleteUserRegistration(userNICText);
+
+                                if (checkDeleteUser == true) {
+                                    Intent intent = new Intent(getActivity(), Login.class);
+                                    startActivity(intent);
+
+                                    //Confirmation message
+                                    Toast.makeText(getActivity(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(getActivity(), "Delete failed", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }).show();
             }
         });
     }

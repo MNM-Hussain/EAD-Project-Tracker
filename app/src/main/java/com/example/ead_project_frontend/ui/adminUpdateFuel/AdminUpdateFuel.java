@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,61 +58,52 @@ public class AdminUpdateFuel extends AppCompatActivity {
         getDieselAvailability_adminFuel = findViewById(R.id.getDieselAvailability_adminFuel);
 
         //call Api
+        //handling API call
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SysConfig.API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
+        Call<FuelStop> call = jsonPlaceHolder.getFuelStationbyemail(Session.ADMIN_USER_EMAIL);
+        call.enqueue(new Callback<FuelStop>() {
+            @Override
+            public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
+                if (!response.isSuccessful()) {
+                    System.out.println("NOT SUCUSSFUL");
+                    SysConfig.API_MESSAGE = "NOT SUCUSSFUL RESPONSE";
+                }
+                FuelStop fuelStop = response.body();
+                System.out.println(fuelStop);
+                System.out.println(fuelStop.getCompanyName());
+                System.out.println(fuelStop.getName());
+                System.out.println(fuelStop.getLocation());
+                System.out.println(fuelStop.getFuelDiselCapacity());
+                System.out.println(fuelStop.getFuelPetrolCapacity());
 
 
-            //handling API call
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(SysConfig.API_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-
-            JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-            Call<FuelStop> call = jsonPlaceHolder.getFuelStationbyemail(Session.ADMIN_USER_EMAIL);
-            call.enqueue(new Callback<FuelStop>() {
-                @Override
-                public void onResponse(Call<FuelStop> call, Response<FuelStop> response) {
-                    if (!response.isSuccessful()) {
-                        System.out.println("NOT SUCUSSFUL");
-                        SysConfig.API_MESSAGE = "NOT SUCUSSFUL RESPONSE";
-                    }
-                    FuelStop fuelStop = response.body();
-                    System.out.println(fuelStop);
-
-                    System.out.println(fuelStop.getCompanyName());
-
-
-                    System.out.println( fuelStop.getName());
-                    System.out.println(fuelStop.getLocation());
-                    System.out.println(fuelStop.getFuelDiselCapacity());
-                    System.out.println(fuelStop.getFuelPetrolCapacity());
-
-
-                    getStationName_adminFuelUpdate.setText(fuelStop.getName());
-                    getStationBranch_adminFuelUpdate.setText(fuelStop.getLocation());
-                    if(fuelStop.getFuelPetrolCapacity()<=0) {
-                        getPetrolAvailability_adminFuel.setText("FINISHED");
-                    }else{
-                        getPetrolAvailability_adminFuel.setText(Double.toString(fuelStop.getFuelPetrolCapacity()) + "L");
-                        }
-
-                    if(fuelStop.getFuelDiselCapacity()<=0) {
-                        getDieselAvailability_adminFuel.setText("FINISHED");
-                    }else{
-                        getDieselAvailability_adminFuel.setText(Double.toString(fuelStop.getFuelDiselCapacity()) + "L");
-                    }
-
+                getStationName_adminFuelUpdate.setText(fuelStop.getName());
+                getStationBranch_adminFuelUpdate.setText(fuelStop.getLocation());
+                if (fuelStop.getFuelPetrolCapacity() <= 0) {
+                    getPetrolAvailability_adminFuel.setText("FINISHED");
+                } else {
+                    getPetrolAvailability_adminFuel.setText(Double.toString(fuelStop.getFuelPetrolCapacity()) + "L");
                 }
 
-                @Override
-                public void onFailure(Call<FuelStop> call, Throwable t) {
+                if (fuelStop.getFuelDiselCapacity() <= 0) {
+                    getDieselAvailability_adminFuel.setText("FINISHED");
+                } else {
+                    getDieselAvailability_adminFuel.setText(Double.toString(fuelStop.getFuelDiselCapacity()) + "L");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<FuelStop> call, Throwable t) {
 
 //
-                }
-            });
-
-
-
+            }
+        });
 
 
         //setting listener and referred a tutorial to do this reference [4]
@@ -150,11 +142,22 @@ public class AdminUpdateFuel extends AppCompatActivity {
         btn_admin_updateFuel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //api call
-                ApiCall.incrementFuel(Session.ADMIN_USER_EMAIL,Session.ADMIN_FUEL_TYPE.toLowerCase(),new Double(String.valueOf(input_numberOfLitres_admin.getText())),input_arrivalTime_admin_fuel.getText().toString());
 
-               Intent intent = new Intent(AdminUpdateFuel.this, StationOwnerDashboard.class);
-               startActivity(intent);
+                // ************validations*******************
+                //Validation for Name
+                if (TextUtils.isEmpty(input_arrivalTime_admin_fuel.getText().toString())) {
+                    input_arrivalTime_admin_fuel.setError("Please pick the fuel arrival time");
+                    return;
+                } else if (TextUtils.isEmpty(input_numberOfLitres_admin.getText())) {
+                    input_numberOfLitres_admin.setError("Please input the Litres of fuel arrived");
+                    return;
+                } else {
+                    //api call
+                    ApiCall.incrementFuel(Session.ADMIN_USER_EMAIL, Session.ADMIN_FUEL_TYPE.toLowerCase(), new Double(String.valueOf(input_numberOfLitres_admin.getText())), input_arrivalTime_admin_fuel.getText().toString());
+
+                    Intent intent = new Intent(AdminUpdateFuel.this, StationOwnerDashboard.class);
+                    startActivity(intent);
+                }
 
             }
         });

@@ -1,7 +1,9 @@
 package com.example.ead_project_frontend.ui.stationOwnerProfile;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ public class StationOwnerProfile extends AppCompatActivity {
     private TextView back_arrow_AdminProfile;
     private Button btn_editProfile_adminProfile, btn_deleteProfile_adminProfile;
     DBHandler DB;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,9 @@ public class StationOwnerProfile extends AppCompatActivity {
         //Initializing Buttons
         btn_deleteProfile_adminProfile = findViewById(R.id.btn_deleteProfile_adminProfile);
         btn_editProfile_adminProfile = findViewById(R.id.btn_editProfile_adminProfile);
+
+        //initializing alertBox
+        builder = new AlertDialog.Builder(this);
 
         //************************Get the data of the login users to textView UI****************************************
         Cursor cursor = DB.getAdminRegistration();
@@ -74,7 +80,33 @@ public class StationOwnerProfile extends AppCompatActivity {
         btn_deleteProfile_adminProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                builder.setTitle("Confirmation Alert")
+                        .setMessage("Can you confirm that you wants to delete your Admin Profile?")
+                        .setCancelable(true)
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                finish();
 
+                                //Implementation to delete the Admin-User
+                                String adminEmailText = getUserEmail_adminProfile.getText().toString();
+
+                                Boolean checkDelete = DB.deleteAdminRegistration(adminEmailText);
+
+                                if (checkDelete == true) {
+                                    Intent intent = new Intent(StationOwnerProfile.this, StationOwnerLogin.class);
+                                    startActivity(intent);
+                                    Toast.makeText(StationOwnerProfile.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(StationOwnerProfile.this, "Delete failed", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }).show();
             }
         });
 
