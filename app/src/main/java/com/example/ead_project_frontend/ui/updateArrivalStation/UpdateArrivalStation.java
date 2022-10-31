@@ -38,6 +38,8 @@ public class UpdateArrivalStation extends AppCompatActivity {
     private TextView back_arrow_arrival, stationBranch, queue, availablePetrol, availableDiesel, name;
     private String id;
     Animation blink_queueValue;
+    Button btn_Queue;
+    TextView totalQueue, getCarQueue, getBikeQueue, getThreeWheeler, getBus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,17 @@ public class UpdateArrivalStation extends AppCompatActivity {
                 int threewheeeler = fuelStop.getThreeWheelerQueue();
                 int total = bike + car + bus + threewheeeler;
                 String totalcount = Integer.toString(total);
+                String bikeQueue = Integer.toString(bike);
+                String carQueue = Integer.toString(car);
+                String busQueue = Integer.toString(bus);
+                String threeWheelerQueue = Integer.toString(threewheeeler);
+
+                //set the values in the queue popup
+                totalQueue.setText(totalcount);
+                getBikeQueue.setText(bikeQueue);
+                getCarQueue.setText(carQueue);
+                getThreeWheeler.setText(threeWheelerQueue);
+                getBus.setText(busQueue);
 
                 SysConfig.fuelStop = new FuelStop(fuelStop.getId(), fuelStop.getName(), fuelStop.getLocation(), fuelStop.getCompanyName(), fuelStop.getFuelDiselCapacity(), fuelStop.getFuelPetrolCapacity(), fuelStop.getBikeQueue(), fuelStop.getCarQueue(), fuelStop.getBusQueue(), fuelStop.getThreeWheelerQueue());
                 System.out.println("CALLING CLASS ASSIGNED " + SysConfig.fuelStop.getLocation());
@@ -166,7 +179,12 @@ public class UpdateArrivalStation extends AppCompatActivity {
         queueDialog.getWindow().getAttributes().windowAnimations = R.style.DialogPop_Animation; //Setting the animations to dialog
 
         //Initializing popup button with ID
-        Button btn_Queue;
+        totalQueue = queueDialog.findViewById(R.id.getTotalQueue);
+        getBikeQueue = queueDialog.findViewById(R.id.getBikeQueue);
+        getCarQueue = queueDialog.findViewById(R.id.getCarQueue);
+        getBus = queueDialog.findViewById(R.id.getBusQueue);
+        getThreeWheeler = queueDialog.findViewById(R.id.getThreeWheelerQueue);
+
         btn_Queue = queueDialog.findViewById(R.id.btn_Queue);
 
         //setOnclick Listener

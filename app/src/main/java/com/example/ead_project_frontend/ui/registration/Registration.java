@@ -61,59 +61,56 @@ public class Registration extends AppCompatActivity {
                 String passwordText = password.getText().toString();
                 String vehicleTypeText = vehicleType.getText().toString();
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-                String nicPattern = "[0-9]{12}";
+//                String nicPattern = "[0-9]{12}";
+                String nicPattern2 = "^[0-9]{9}[vV]$";
                 String vehicleTypePattern = "[Car] || [car] || [Bike] || [bike] || ";
-//                Pattern p = Pattern.compile("(0|91)?[6-9][0-9]{9}");
 
-                // ************validations*******************
-                //Validation for Name
-                if (TextUtils.isEmpty(nameText)) {
-                    userName.setError("Please Enter Your Full Name");
-                    return;
-                }
-
-                //validation for NIC
-                if (TextUtils.isEmpty(nicText)) {
-                    nic.setError("Please enter your NIC");
-                    return;
-                } else if (nicText.matches(nicPattern)) {
-                    Toast.makeText(getApplicationContext(), "valid NIC", Toast.LENGTH_SHORT).show();
-                } else {
-                    nic.setError("please enter Valid NIC!!!");
-                }
-
-                //validation for email
-                if (TextUtils.isEmpty(emailText)) {
-                    email.setError("please enter Email!!!");
-                    return;
-                } else if (emailText.matches(emailPattern)) {
-                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
-                } else {
-                    email.setError("please enter Valid Email address!!!");
-                }
-
-                //validation for password
-                if (TextUtils.isEmpty(passwordText)) {
-                    password.setError("please enter Password!!!");
-                    return;
-                }
-                else if (passwordText.length() < 8) {
-                    password.setError("please enter Strong Password!!!");
-                }
-
-                //validation for VehicleTYPE
-                if (TextUtils.isEmpty(vehicleTypeText)) {
-                    vehicleType.setError("Please Enter Your vehicle Type");
-                    return;
-                }
 
                 // Check the existing user by nic and email
                 Boolean checkExistingUser = DB.checkExistingUser(nicText, emailText);
 
                 // validation that to make sure all the fields are filled without any empty fields
-                if (nameText.equals("") || nicText.equals("") || emailText.equals("") || passwordText.equals("") || vehicleTypeText.equals(""))
+                if (nameText.equals("") || nicText.equals("") || emailText.equals("") || passwordText.equals("") || vehicleTypeText.equals("")) {
                     Toast.makeText(Registration.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                else
+
+                    // ************validations*******************
+                    //Validation for Name
+                    if (TextUtils.isEmpty(nameText)) {
+                        userName.setError("Please Enter Your Full Name");
+                        return;
+                    } else
+
+                        //validation for NIC
+                        if (TextUtils.isEmpty(nicText)) {
+                            nic.setError("Please enter your NIC");
+                            return;
+                        } else if ((!nicText.matches(nicPattern2))) {
+                            nic.setError("please enter Valid NIC!!!");
+                        } else
+
+                            //validation for email
+                            if (TextUtils.isEmpty(emailText)) {
+                                email.setError("please enter Email!!!");
+                                return;
+                            } else if (!emailText.matches(emailPattern)) {
+                                email.setError("please enter Valid Email address!!!");
+                            } else
+
+                                //validation for password
+                                if (TextUtils.isEmpty(passwordText)) {
+                                    password.setError("please enter Password!!!");
+                                    return;
+                                } else if (passwordText.length() < 8) {
+                                    password.setError("please enter Strong Password!!!");
+                                } else
+
+                                    //validation for VehicleTYPE
+                                    if (TextUtils.isEmpty(vehicleTypeText)) {
+                                        vehicleType.setError("Please Enter Your vehicle Type");
+                                        return;
+                                    }
+
+                } else
                     // if there are no any existing user with same nic and emailText then the data will be inserted
                     if (checkExistingUser == false) {
                         Boolean InsertRegistrationData = DB.insertUserRegistration(nameText, nicText, emailText, passwordText, vehicleTypeText, Session.FUEL_TYPE);
@@ -126,6 +123,68 @@ public class Registration extends AppCompatActivity {
                     } else {
                         Toast.makeText(Registration.this, "Error!! Already an user exist with same ID, please sign-in with unique ID", Toast.LENGTH_SHORT).show();
                     }
+
+//                // ************validations*******************
+//                //Validation for Name
+//                if (TextUtils.isEmpty(nameText)) {
+//                    userName.setError("Please Enter Your Full Name");
+//                    return;
+//                }
+//
+//                //validation for NIC
+//                if (TextUtils.isEmpty(nicText)) {
+//                    nic.setError("Please enter your NIC");
+//                    return;
+//                } else if (nicText.matches(nicPattern)) {
+//                    Toast.makeText(getApplicationContext(), "valid NIC", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    nic.setError("please enter Valid NIC!!!");
+//                }
+//
+//                //validation for email
+//                if (TextUtils.isEmpty(emailText)) {
+//                    email.setError("please enter Email!!!");
+//                    return;
+//                } else if (emailText.matches(emailPattern)) {
+//                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    email.setError("please enter Valid Email address!!!");
+//                }
+//
+//                //validation for password
+//                if (TextUtils.isEmpty(passwordText)) {
+//                    password.setError("please enter Password!!!");
+//                    return;
+//                }
+//                else if (passwordText.length() < 8) {
+//                    password.setError("please enter Strong Password!!!");
+//                }
+//
+//                //validation for VehicleTYPE
+//                if (TextUtils.isEmpty(vehicleTypeText)) {
+//                    vehicleType.setError("Please Enter Your vehicle Type");
+//                    return;
+//                }
+//
+//                // Check the existing user by nic and email
+//                Boolean checkExistingUser = DB.checkExistingUser(nicText, emailText);
+//
+//                // validation that to make sure all the fields are filled without any empty fields
+//                if (nameText.equals("") || nicText.equals("") || emailText.equals("") || passwordText.equals("") || vehicleTypeText.equals(""))
+//                    Toast.makeText(Registration.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+//                else
+//                    // if there are no any existing user with same nic and emailText then the data will be inserted
+//                    if (checkExistingUser == false) {
+//                        Boolean InsertRegistrationData = DB.insertUserRegistration(nameText, nicText, emailText, passwordText, vehicleTypeText, Session.FUEL_TYPE);
+//                        if (InsertRegistrationData == true) {
+//                            Toast.makeText(Registration.this, "You have successfully Registered", Toast.LENGTH_SHORT).show();
+//                            MoveToHome();
+//                        } else {
+//                            Toast.makeText(Registration.this, "Error!! Registration unsuccessful", Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        Toast.makeText(Registration.this, "Error!! Already an user exist with same ID, please sign-in with unique ID", Toast.LENGTH_SHORT).show();
+//                    }
             }
         });
     }

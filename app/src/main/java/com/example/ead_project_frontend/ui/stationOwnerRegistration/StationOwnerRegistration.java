@@ -66,73 +66,66 @@ public class StationOwnerRegistration extends AppCompatActivity {
                 String Station_Password_registration = input_Station_Password_registration.getText().toString();
                 String station_ContactNumber = input_station_ContactNumber.getText().toString();
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-                String phoneNumberPattern  = "[0-9]{10}";
+                String phoneNumberPattern = "[0-9]{10}";
 
-                // ************validations*******************
-                //Validation for Name
-                if (TextUtils.isEmpty(Station_userName_Text)) {
-                    input_Station_userName.setError("Please Enter Your Full Name");
-                    return;
-                }
-
-                //Validation for StationName
-                if (TextUtils.isEmpty(Station_Name)) {
-                    input_Station_Name.setError("Please Enter the Station Name");
-                    return;
-                }
-
-                //Validation for StationBranch
-                if (TextUtils.isEmpty(station_branch)) {
-                    input_station_branch.setError("Please Enter the Station Branch");
-                    return;
-                }
-
-                //validation for email
-                if (TextUtils.isEmpty(Station_email_registration )) {
-                    input_Station_email_registration.setError("please enter a Email!!!");
-                    return;
-                } else if (Station_email_registration.matches(emailPattern)) {
-                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
-                } else {
-                    input_Station_email_registration.setError("please enter Valid Email address!!!");
-                }
-
-                //validation for password
-                if (TextUtils.isEmpty(Station_Password_registration)) {
-                    input_Station_Password_registration.setError("please enter Password!!!");
-                    return;
-                }
-                else if (Station_Password_registration.length() < 8) {
-                    input_Station_Password_registration.setError("please enter Strong Password!!!");
-                }
-
-                //validation for contactNumber
-                if (TextUtils.isEmpty(station_ContactNumber )) {
-                    input_station_ContactNumber.setError("please enter Phone Number!!!");
-                    return;
-                } else if (station_ContactNumber.matches(phoneNumberPattern)) {
-                    Toast.makeText(getApplicationContext(), "Phone number is Valid", Toast.LENGTH_SHORT).show();
-                } else {
-                    input_station_ContactNumber.setError("Enter a valid Phone number!!!");
-                }
 
                 // Check the existing user by nic and email
                 Boolean checkExistingStationOwner = DB.checkExistingStationOwner(Station_email_registration);
 
                 // validation that to make sure all the fields are filled without any empty fields
-                if (Station_userName_Text.equals("") || Station_Name.equals("") || station_branch.equals("") || Station_email_registration.equals("") || Station_Password_registration.equals("") || station_ContactNumber.equals(""))
+                if (Station_userName_Text.equals("") || Station_Name.equals("") || station_branch.equals("") || Station_email_registration.equals("") || Station_Password_registration.equals("") || station_ContactNumber.equals("")) {
                     Toast.makeText(StationOwnerRegistration.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                else
+                    // ************validations*******************
+                    //Validation for Name
+                    if (TextUtils.isEmpty(Station_userName_Text)) {
+                        input_Station_userName.setError("Please Enter Your Full Name");
+                        return;
+                    } else
+
+                        //Validation for StationName
+                        if (TextUtils.isEmpty(Station_Name)) {
+                            input_Station_Name.setError("Please Enter the Station Name");
+                            return;
+                        } else
+
+                            //Validation for StationBranch
+                            if (TextUtils.isEmpty(station_branch)) {
+                                input_station_branch.setError("Please Enter the Station Branch");
+                                return;
+                            } else
+
+                                //validation for email
+                                if (TextUtils.isEmpty(Station_email_registration)) {
+                                    input_Station_email_registration.setError("please enter a Email!!!");
+                                    return;
+                                } else if (!Station_email_registration.matches(emailPattern)) {
+                                    input_Station_email_registration.setError("please enter Valid Email address!!!");
+                                } else
+                                    //validation for password
+                                    if (TextUtils.isEmpty(Station_Password_registration)) {
+                                        input_Station_Password_registration.setError("please enter Password!!!");
+                                        return;
+                                    } else if (Station_Password_registration.length() < 8) {
+                                        input_Station_Password_registration.setError("please enter Strong Password!!!");
+                                    } else
+                                        //validation for contactNumber
+                                        if (TextUtils.isEmpty(station_ContactNumber)) {
+                                            input_station_ContactNumber.setError("please enter Phone Number!!!");
+                                            return;
+                                        } else if (!station_ContactNumber.matches(phoneNumberPattern)) {
+                                            input_station_ContactNumber.setError("Enter a valid Phone number!!!");
+                                        }
+                } else
                     // if there are no any existing user with same nic and emailText then the data will be inserted
                     if (checkExistingStationOwner == false) {
                         Boolean InsertStationOwnerRegistrationData = DB.insertStationOwnerRegistration(Station_userName_Text, Station_Name, station_branch, Station_email_registration, Station_Password_registration, station_ContactNumber);
                         //api call
-                        FuelStop fuelStop = new FuelStop(Station_Name, station_branch,Station_Name, Station_email_registration);
+                        FuelStop fuelStop = new FuelStop(Station_Name, station_branch, Station_Name, Station_email_registration);
                         ApiCall.createFuelStop(fuelStop);
 
                         if (InsertStationOwnerRegistrationData == true) {
                             Toast.makeText(StationOwnerRegistration.this, "You have successfully Registered", Toast.LENGTH_SHORT).show();
-                               MoveNextActivity();
+                            MoveNextActivity();
                         } else {
                             Toast.makeText(StationOwnerRegistration.this, "Error!! Registration unsuccessful", Toast.LENGTH_SHORT).show();
                         }
@@ -141,6 +134,77 @@ public class StationOwnerRegistration extends AppCompatActivity {
                     }
 
 
+//                // ************validations*******************
+//                //Validation for Name
+//                if (TextUtils.isEmpty(Station_userName_Text)) {
+//                    input_Station_userName.setError("Please Enter Your Full Name");
+//                    return;
+//                }
+//
+//                //Validation for StationName
+//                if (TextUtils.isEmpty(Station_Name)) {
+//                    input_Station_Name.setError("Please Enter the Station Name");
+//                    return;
+//                }
+//
+//                //Validation for StationBranch
+//                if (TextUtils.isEmpty(station_branch)) {
+//                    input_station_branch.setError("Please Enter the Station Branch");
+//                    return;
+//                }
+//
+//                //validation for email
+//                if (TextUtils.isEmpty(Station_email_registration )) {
+//                    input_Station_email_registration.setError("please enter a Email!!!");
+//                    return;
+//                } else if (Station_email_registration.matches(emailPattern)) {
+//                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    input_Station_email_registration.setError("please enter Valid Email address!!!");
+//                }
+//
+//                //validation for password
+//                if (TextUtils.isEmpty(Station_Password_registration)) {
+//                    input_Station_Password_registration.setError("please enter Password!!!");
+//                    return;
+//                }
+//                else if (Station_Password_registration.length() < 8) {
+//                    input_Station_Password_registration.setError("please enter Strong Password!!!");
+//                }
+//
+//                //validation for contactNumber
+//                if (TextUtils.isEmpty(station_ContactNumber )) {
+//                    input_station_ContactNumber.setError("please enter Phone Number!!!");
+//                    return;
+//                } else if (station_ContactNumber.matches(phoneNumberPattern)) {
+//                    Toast.makeText(getApplicationContext(), "Phone number is Valid", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    input_station_ContactNumber.setError("Enter a valid Phone number!!!");
+//                }
+//
+//                // Check the existing user by nic and email
+//                Boolean checkExistingStationOwner = DB.checkExistingStationOwner(Station_email_registration);
+//
+//                // validation that to make sure all the fields are filled without any empty fields
+//                if (Station_userName_Text.equals("") || Station_Name.equals("") || station_branch.equals("") || Station_email_registration.equals("") || Station_Password_registration.equals("") || station_ContactNumber.equals(""))
+//                    Toast.makeText(StationOwnerRegistration.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+//                else
+//                    // if there are no any existing user with same nic and emailText then the data will be inserted
+//                    if (checkExistingStationOwner == false) {
+//                        Boolean InsertStationOwnerRegistrationData = DB.insertStationOwnerRegistration(Station_userName_Text, Station_Name, station_branch, Station_email_registration, Station_Password_registration, station_ContactNumber);
+//                        //api call
+//                        FuelStop fuelStop = new FuelStop(Station_Name, station_branch,Station_Name, Station_email_registration);
+//                        ApiCall.createFuelStop(fuelStop);
+//
+//                        if (InsertStationOwnerRegistrationData == true) {
+//                            Toast.makeText(StationOwnerRegistration.this, "You have successfully Registered", Toast.LENGTH_SHORT).show();
+//                               MoveNextActivity();
+//                        } else {
+//                            Toast.makeText(StationOwnerRegistration.this, "Error!! Registration unsuccessful", Toast.LENGTH_SHORT).show();
+//                        }
+//                    } else {
+//                        Toast.makeText(StationOwnerRegistration.this, "Error!! Already an user exist, please sign-in", Toast.LENGTH_SHORT).show();
+//                    }
 
             }
         });

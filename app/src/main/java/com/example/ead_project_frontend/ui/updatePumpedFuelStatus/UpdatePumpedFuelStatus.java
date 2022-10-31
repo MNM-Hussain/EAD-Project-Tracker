@@ -95,10 +95,8 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
                     System.out.println(pauseOffset + "difference time");
                     running = false;
                 }
-
                 //api call
                 ApiCall.decrementQueue(ID, Session.VECHILE_TYPE);
-
             }
         });
 
@@ -112,9 +110,6 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
 
         //Created the Dialog here
         dialog = new Dialog(this);
-        fuelAmount = dialog.findViewById(R.id.input_numberOfLitres);
-
-
         dialog.setContentView(R.layout.dialog_alert_pumped);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -129,16 +124,19 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
         Button btn_ConfirmInsertPump = dialog.findViewById(R.id.btn_ConfirmInsertPump);
         Button btn_CancelInsertPump = dialog.findViewById(R.id.btn_CancelInsertPump);
 
+        fuelAmount = dialog.findViewById(R.id.input_numberOfLitres);
+
         btn_ConfirmInsertPump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(UpdatePumpedFuelStatus.this, "your pumped is confirmed", Toast.LENGTH_SHORT).show();
-                //System.out.println(fuelAmount.getText().toString());
+                System.out.println("fuel Amount is pumped" + fuelAmount.getText().toString());
+                Session.FUEL_AMOUNT = Double.parseDouble(fuelAmount.getText().toString());
                 dialog.dismiss();
 
                 //api call
                 ApiCall.decrementQueue(ID, Session.VECHILE_TYPE);
-//                ApiCall.decrementfuel(ID,Session.FUEL_TYPE,Session.FUEL_AMOUNT);
+                ApiCall.decrementfuel(ID,Session.FUEL_TYPE, Session.FUEL_AMOUNT);
 
                 //send to pumped status page from popup
                 Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);

@@ -1,5 +1,6 @@
 package com.example.ead_project_frontend.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -44,6 +45,7 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
         return new FuelStopRecyclerViewAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull FuelStopRecyclerViewAdapter.MyViewHolder holder, int position) {
         //get total
@@ -71,6 +73,8 @@ public class FuelStopRecyclerViewAdapter extends RecyclerView.Adapter<FuelStopRe
                 context.startActivity(intent);
             }
         });
+
+         fuelProvider = fuelProvider.replaceAll("\\s", "");
 
         if (fuelProvider.equalsIgnoreCase("ceypetco")) {
             holder.fuelstationlogo.setImageResource(R.drawable.ceypetco);

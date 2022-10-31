@@ -77,7 +77,8 @@ public class UpdateProfile extends AppCompatActivity {
                 String updateVehicleType = Update_vehicleType.getText().toString();
                 String updateFuelType = Update_FuelType.getText().toString();
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-                String nicPattern = "[0-9]{12}";
+//                String nicPattern = "[0-9]{12}";
+                String nicPattern2 = "^[0-9]{9}[vV]$";
 
                 // ************validations*******************
                 //validation for email
@@ -100,7 +101,7 @@ public class UpdateProfile extends AppCompatActivity {
                 if (TextUtils.isEmpty(updateNIC)) {
                     Update_NIC.setError("Please enter your NIC");
                     return;
-                } else if (updateNIC.matches(nicPattern)) {
+                } else if (updateNIC.matches(nicPattern2)) {
                     Toast.makeText(getApplicationContext(), "valid NIC", Toast.LENGTH_SHORT).show();
                 } else {
                     Update_NIC.setError("please enter Valid NIC!!!");

@@ -43,32 +43,23 @@ public class Login extends AppCompatActivity {
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 //                String password_Pattern = "^(?=.*[0-9])(?=.*[A-Z])";
 
-                //****validations for email and password********
-                //validation for email
-                if (TextUtils.isEmpty(email_Text)) {
-                    userEmail.setError("please enter Email!!!");
-                    return;
-                } else if (email_Text.matches(emailPattern)) {
-                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
-                } else {
-                    userEmail.setError("please enter Valid Email address!!!");
-                }
-
-                //validation for password
-                if (TextUtils.isEmpty(password_Text)) {
-                    password.setError("please enter Password!!!");
-                    return;
-                }
-//                else if (password_Text.matches(password_Pattern)) {
-//                    Toast.makeText(getApplicationContext(), "valid Password", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    password.setError("please enter Strong Password!!!");
-//                }
 
                 // validation that to make sure all the fields are filled without any empty fields
-                if (email_Text.equals("") || password_Text.equals(""))
+                if (email_Text.equals("") || password_Text.equals("")) {
                     Toast.makeText(Login.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                else {
+                    //****validations for email and password********
+                    //validation for email
+                    if (TextUtils.isEmpty(email_Text)) {
+                        userEmail.setError("please enter Email!!!");
+                        return;
+                    } else if (!email_Text.matches(emailPattern)) {
+                        userEmail.setError("please enter Valid Email address!!!");
+                    } else if (TextUtils.isEmpty(password_Text)) {                  //validation for password
+                        password.setError("please enter Password!!!");
+                        return;
+                    }
+                    
+                } else {
                     Boolean checkUser_credentials = DB.checkUserCredentials(email_Text, password_Text);
                     if (checkUser_credentials == true) {
                         Toast.makeText(Login.this, "Login is successful! ", Toast.LENGTH_SHORT).show();
@@ -77,6 +68,41 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
+
+//                //****validations for email and password********
+//                //validation for email
+//                if (TextUtils.isEmpty(email_Text)) {
+//                    userEmail.setError("please enter Email!!!");
+//                    return;
+//                } else if (email_Text.matches(emailPattern)) {
+//                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    userEmail.setError("please enter Valid Email address!!!");
+//                }
+//
+//                //validation for password
+//                if (TextUtils.isEmpty(password_Text)) {
+//                    password.setError("please enter Password!!!");
+//                    return;
+//                }
+////                else if (password_Text.matches(password_Pattern)) {
+////                    Toast.makeText(getApplicationContext(), "valid Password", Toast.LENGTH_SHORT).show();
+////                } else {
+////                    password.setError("please enter Strong Password!!!");
+////                }
+//
+//                // validation that to make sure all the fields are filled without any empty fields
+//                if (email_Text.equals("") || password_Text.equals(""))
+//                    Toast.makeText(Login.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+//                else {
+//                    Boolean checkUser_credentials = DB.checkUserCredentials(email_Text, password_Text);
+//                    if (checkUser_credentials == true) {
+//                        Toast.makeText(Login.this, "Login is successful! ", Toast.LENGTH_SHORT).show();
+//                        openHomePage();
+//                    } else {
+//                        Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
             }
         });
     }
