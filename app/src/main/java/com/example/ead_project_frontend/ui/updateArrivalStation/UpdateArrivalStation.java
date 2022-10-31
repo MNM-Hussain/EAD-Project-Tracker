@@ -9,6 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import com.example.ead_project_frontend.api.JsonPlaceHolder;
 import com.example.ead_project_frontend.config.Session;
 import com.example.ead_project_frontend.config.SysConfig;
 import com.example.ead_project_frontend.model.FuelStop;
+import com.example.ead_project_frontend.ui.dialog.DialogVehicleQueue;
 import com.example.ead_project_frontend.ui.login.Login;
 import com.example.ead_project_frontend.ui.navigation.NavigationBar;
 import com.example.ead_project_frontend.ui.updatePumpedFuelStatus.UpdatePumpedFuelStatus;
@@ -31,9 +34,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UpdateArrivalStation extends AppCompatActivity {
     private Button btn_arrivedStation;
-    private Dialog dialog;
+    private Dialog dialog, queueDialog;
     private TextView back_arrow_arrival, stationBranch, queue, availablePetrol, availableDiesel, name;
     private String id;
+    Animation blink_queueValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +55,22 @@ public class UpdateArrivalStation extends AppCompatActivity {
         availableDiesel = findViewById(R.id.getDieselAvailability);
         name = findViewById(R.id.getStationName);
 
+        //************blink the Queue text*****************
+        blink_queueValue = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.blink_text);
 
-//Extract the data…
+        queue.startAnimation(blink_queueValue);
 
+        //------------------------------------------------------------------------
+
+        //Extract the data…
         String ID = savedInstanceState.getString("ID");
-
 
         //handling API call
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(SysConfig.API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
 
         JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
         Call<FuelStop> call = jsonPlaceHolder.getFuelStationbyID(ID);
@@ -75,9 +83,7 @@ public class UpdateArrivalStation extends AppCompatActivity {
                 }
                 FuelStop fuelStop = response.body();
                 System.out.println(fuelStop);
-
                 System.out.println(fuelStop.getCompanyName());
-
                 System.out.println(fuelStop.getId());
                 System.out.println("INSIDE GET ONE" + fuelStop.getName());
                 System.out.println(fuelStop.getLocation());
@@ -105,28 +111,21 @@ public class UpdateArrivalStation extends AppCompatActivity {
                 if (fuelStop.getFuelPetrolCapacity() == 0) {
                     availablePetrol.setText("FINISHED");
                 } else {
-
                     availablePetrol.setText(Double.toString(fuelStop.getFuelPetrolCapacity()) + "L");
                 }
 
                 if (fuelStop.getFuelDiselCapacity() == 0) {
                     availableDiesel.setText("FINISHED");
                 } else {
-
                     availableDiesel.setText(Double.toString(fuelStop.getFuelDiselCapacity()) + "L");
                 }
-
-
             }
-
 
             @Override
             public void onFailure(Call<FuelStop> call, Throwable t) {
-
 //
             }
         });
-
 
         // send to previous page
         back_arrow_arrival.setOnClickListener(new View.OnClickListener() {
@@ -137,16 +136,50 @@ public class UpdateArrivalStation extends AppCompatActivity {
             }
         });
 
-        //To get the popup
+        //To get the confirmation popup before moving next page
         btn_arrivedStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.show();
-
             }
         });
 
-        //Created the Dialog here
+        //to get the Variation of vehicles in the Queue
+        queue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                queueDialog.show(); //***********
+            }
+        });
+
+        //*********created dialog here for Queue**********************************
+
+        //queue dialog Initialize
+        queueDialog = new Dialog(this);
+        queueDialog.setContentView(R.layout.activity_dialog_vehicle_queue);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            queueDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_flow_background));
+        }
+        queueDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        queueDialog.setCancelable(false); //Optional
+        queueDialog.getWindow().getAttributes().windowAnimations = R.style.DialogPop_Animation; //Setting the animations to dialog
+
+        //Initializing popup button with ID
+        Button btn_Queue;
+        btn_Queue = queueDialog.findViewById(R.id.btn_Queue);
+
+        //setOnclick Listener
+        btn_Queue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                queueDialog.dismiss();
+            }
+        });
+
+        //***********Created the Dialog here for arrival Confirmation *****************
+
+        //dialog Initialize
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_alert_arrival_station);
 
@@ -161,13 +194,11 @@ public class UpdateArrivalStation extends AppCompatActivity {
         Button btn_arrived = dialog.findViewById(R.id.btn_arrived);
         Button btn_notArrived = dialog.findViewById(R.id.btn_notArrived);
 
-
         btn_arrived.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(UpdateArrivalStation.this, "your arrival is confirmed", Toast.LENGTH_SHORT).show();
                 //call api
-
 
                 dialog.dismiss();
 
@@ -188,6 +219,6 @@ public class UpdateArrivalStation extends AppCompatActivity {
                 Toast.makeText(UpdateArrivalStation.this, "not confirmed", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
-        });
+        }); //************Created Dialog Finishes here**************************
     }
 }
