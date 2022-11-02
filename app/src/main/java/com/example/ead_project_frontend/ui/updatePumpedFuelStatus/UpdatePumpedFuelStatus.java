@@ -1,12 +1,15 @@
 package com.example.ead_project_frontend.ui.updatePumpedFuelStatus;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,6 +33,7 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
         back_arrow = findViewById(R.id.back_arrow);
         btn_Exit_Pumped = findViewById(R.id.btn_Exit_Pumped);
         btn_Pumped = findViewById(R.id.btn_Pumped);
+
+        //initializing alertBox
+        builder = new AlertDialog.Builder(this);
 
         //
         back_arrow.setOnClickListener(new View.OnClickListener() {
@@ -85,18 +92,32 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
         btn_Exit_Pumped.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);
-                startActivity(intent);
+                builder.setTitle("Confirmation Alert")
+                        .setMessage("Are you sure you want to exit without pumping?")
+                        .setCancelable(true)
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);
+                                startActivity(intent);
 
-                //stop the timer
-                if (running) {
-                    chronometer.stop();
-                    pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
-                    System.out.println(pauseOffset + "difference time");
-                    running = false;
-                }
-                //api call
-                ApiCall.decrementQueue(ID, Session.VECHILE_TYPE);
+                                //stop the timer
+                                if (running) {
+                                    chronometer.stop();
+                                    pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+                                    System.out.println(pauseOffset + "difference time");
+                                    running = false;
+                                }
+                                //api call
+                                ApiCall.decrementQueue(ID, Session.VECHILE_TYPE);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }).show();
             }
         });
 
@@ -129,25 +150,32 @@ public class UpdatePumpedFuelStatus extends AppCompatActivity {
         btn_ConfirmInsertPump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(UpdatePumpedFuelStatus.this, "your pumped is confirmed", Toast.LENGTH_SHORT).show();
-                System.out.println("fuel Amount is pumped" + fuelAmount.getText().toString());
-                Session.FUEL_AMOUNT = Double.parseDouble(fuelAmount.getText().toString());
-                dialog.dismiss();
 
-                //api call
-                ApiCall.decrementQueue(ID, Session.VECHILE_TYPE);
-                ApiCall.decrementfuel(ID,Session.FUEL_TYPE, Session.FUEL_AMOUNT);
+                if (TextUtils.isEmpty(fuelAmount.getText().toString())) {
+                    fuelAmount.setError("Please Enter amount of fuel you Pumped");
+                    return;
+                } else {
+                    Toast.makeText(UpdatePumpedFuelStatus.this, "your pumped is confirmed", Toast.LENGTH_SHORT).show();
+                    System.out.println("fuel Amount is pumped" + fuelAmount.getText().toString());
+                    Session.FUEL_AMOUNT = Double.parseDouble(fuelAmount.getText().toString());
+                    dialog.dismiss();
 
-                //send to pumped status page from popup
-                Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);
-                startActivity(intent);
 
-                //Stop the timer
-                if (running) {
-                    chronometer.stop();
-                    pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
-                    System.out.println(pauseOffset + "difference time");
-                    running = false;
+                    //api call
+                    ApiCall.decrementQueue(ID, Session.VECHILE_TYPE);
+                    ApiCall.decrementfuel(ID, Session.FUEL_TYPE, Session.FUEL_AMOUNT);
+
+                    //send to pumped status page from popup
+                    Intent intent = new Intent(UpdatePumpedFuelStatus.this, NavigationBar.class);
+                    startActivity(intent);
+
+                    //Stop the timer
+                    if (running) {
+                        chronometer.stop();
+                        pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+                        System.out.println(pauseOffset + "difference time");
+                        running = false;
+                    }
                 }
             }
         });
